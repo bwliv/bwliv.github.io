@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Boxplots</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+
+	<body>
+
+		<div id="chart" style="width: 400px; float:left;">
+			<h3>Create a boxplot</h3>
+			<p>Click in the center of the orange strip to add points.</p>
+		</div>
+
+		<div style="width: 400px; float: left;">
+			<h3>How to Read a Boxplot</h3>
+      <p><i>The box in a boxplot represents the data that is between the first quartile
+        and third quartile - the "middle half" of the data.
+        Data outside this box is among the lowest or highest
+        25% of data values. The bar in the middle of the box represents the median -
+        the value for which at least half the data values are no more than it and
+        at least half the data values are no less than it. The interquartile range
+        (IQR) is the distance from the first to the third quartile. The "whiskers"
+        out from the box extend to the last point that is within 1.5*IQR of the edge of the box.
+        Any point outside this range is considered an outlier, and is colored light blue.</i></p>
+			<p id='stats'></p>
+		</div>
+
+
+	<script type="text/javascript">
+
+
+		// add info to right side
+		thepoints = d3.select('#stats').append('p').text('Data Values: ')
+		theouliers = d3.select('#stats').append('p').text('Outliers: ')
+		theupper = d3.select('#stats').append('p').text('Upper Whisker: ')
+		theq3 = d3.select('#stats').append('p').text('Q3: ')
+		themedian = d3.select('#stats').append('p').text('Median: ')
+		theq1 = d3.select('#stats').append('p').text('Q1: ')
+		thelower = d3.select('#stats').append('p').text('Lower Whisker: ')
+
+		var svgheight = 500;
+		var svgwidth = 500;
+		var mid = svgwidth/2;
+
+		var margin = {top: 25, right:25, bottom: 0, left:25};
+
+		var outerrectwidth = 200;
+		var innerrectwidth = outerrectwidth/2;
+		var figureheight = svgheight;
+
+    d3.select('#chart')
+			.append('form')
+
+		d3.select('form')
+			.append('input')
+			.attr('id','add')
+			.attr('type','radio')
+			.attr('name','yes')
+			.attr('value','yes')
+			.attr('checked','true');
+
+		d3.select('form')
+			.append('label')
+			.text('Add Points       ');
+
+		d3.select('form')
+			.append('input')
+			.attr('id','remove')
+			.attr('type','radio')
+			.attr('name','yes')
+			.attr('value','yes');
+
+		d3.select('form')
+			.append('label')
+			.text('Remove Points');
+
+
+		var svg = d3.select('#chart')
+			.append('svg')
+			.attr('height',800)
+			.attr('width',500)
+      .attr('style','float: left')
+
+
+
+		d3.select('rect').attr('fill','red');
+
+
+		svg
+			.append('rect')
+			.attr('id','outer')
+			.attr('x',(svgwidth-outerrectwidth)/2 - margin.left)
+			.attr('y',margin.top)
+			.attr('width',outerrectwidth)
+			.attr('height',figureheight)
+			.attr('fill','lightsalmon');
+
+
+		svg
+			.append('rect')
+			.attr('id','inner')
+			.attr('x',(svgwidth-innerrectwidth)/2 - margin.left)
+			.attr('y',margin.top)
+			.attr('width',innerrectwidth)
+			.attr('height',figureheight)
+			.attr('fill','lightcoral');
+
+
+
+		d3.selectAll('input')
+			.on('change',function() {
+
+			var action = d3.select(this).attr('id');
+			console.log(action);
+			if (action == 'add'){
+			addpoints();
+			} else {
+			removepoints();
+			}});
+
+
+		var addpoints = function(){
+
+		d3.select('#inner')
+			.on('click', function() {
+
+			var coords = d3.mouse(this);
+			var data = Math.round(110 - 2*coords[1]/(svgheight)*100);
+
+			svg
+				.append('circle')
+				.data([data])
+				.attr('r','3')
+				.attr('cx',coords[0])
+				.attr('cy',coords[1]);
+        var unsortedpoints = d3.selectAll('circle').data();
+        var pointslength=unsortedpoints.length;
+        if (pointslength>=2)
+			{updatepoints()}
+      else {updatepointswithouttransitions()};
+
+        });
+
+		d3.selectAll('circle')
+			.on('click',function(){});
+
+		}
+
+		var removepoints = function(){
+
+		d3.selectAll('circle')
+			.on('click',function() {
+			d3.select(this).remove();
+      var unsortedpoints = d3.selectAll('circle').data();
+      var pointslength=unsortedpoints.length;
+      if (pointslength>0)
+			{updatepoints()}
+      else {getridofeverything()};
+			})
+
+		d3.select('#inner')
+			.on('click',function(){})
+		}
+
+		addpoints();
+
+		// add scale
+		var yScale = d3.scaleLinear()
+			.domain([-100,100])
+			.range([svgheight,0]);
+
+		var xScale = d3.scaleLinear()
+			.domain([0,3])
+			.range([0,innerrectwidth])
+
+		// add axis
+		var yAxis = d3.axisLeft().scale(yScale);
+		var xAxis = d3.axisBottom().scale(xScale);
+
+		svg.append("g")
+		  .call(yAxis);
+
+		svg.append("g")
+		  .attr("class", "yAxis")
+      .attr('id','theyaxis')
+		  .attr("transform", `translate (${margin.left}, ${margin.top})`)
+		  .call(yAxis);
+
+      var width=100
+      svg
+      .append("line")
+      .attr("id","vertline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black")
+
+      svg
+      .append("rect")
+      .attr("id","rectbox")
+      .attr("x", mid - width/2)
+      .attr("y", svgheight/2 )
+      .attr("height", 0 )
+      .attr("width", 0 )
+      .attr("stroke", "black")
+      .style("fill", "red")
+      .style("pointer-events", "none");
+
+      svg
+      .append("line")
+      .attr("id","medianline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black")
+
+      svg
+      .append("line")
+      .attr("id","upperline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black")
+
+      svg
+      .append("line")
+      .attr("id","lowerline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black")
+
+		var updatepoints = function() {
+
+			var unsortedpoints = d3.selectAll('circle').data();
+			var points = unsortedpoints.sort(d3.ascending);
+
+			thepoints.text(function() {return 'Data Values:' + points;});
+
+			var q3 = d3.quantile(points,.75);
+			var median = d3.quantile(points,.5);
+			var q1 = d3.quantile(points,.25);
+			var iqr = Math.abs(q3-q1);
+      var templower = points.filter(function(x) {return (x >= q1-(1.5*iqr))})[0]
+      var newpts = points.filter(function(x) {return (x <= q3+(1.5*iqr))})
+      var tempupper=newpts[newpts.length-1]
+			var outliers = points.filter(function(x) {return (x > q3+(1.5*iqr) || x < q1-(1.5*iqr))});
+      if (templower>q1){lower=q1};
+      if (templower<=q1){lower=templower};
+      if (tempupper<q3){upper=q3};
+      if (tempupper>=q3){upper=tempupper};
+			themedian.text(function() {return 'Median: ' + Math.round(median)});
+			theq1.text(function() {return 'Q1: ' + Math.round(q1)});
+			theq3.text(function() {return 'Q3: ' + Math.round(q3)});
+			theouliers.text(function() {return 'Outliers:' + outliers});
+      thelower.text(function() {return 'Lower Whisker:' + lower});
+      theupper.text(function() {return 'Upper Whisker:' + upper});
+
+
+      d3.selectAll('circle')
+      .style("fill", function(x) {
+            if (x > q3+(1.5*iqr) || x < q1-(1.5*iqr)) {return "lightblue"}
+            else 	{ return "black" }
+        ;});
+
+
+      svg
+      .select("#vertline")
+      .transition()
+      .duration(1100)
+      .attr("x1", mid - margin.left)
+      .attr("x2", mid - margin.left)
+      .attr("y1", yScale(lower)+margin.top )
+      .attr("y2", yScale(upper)+margin.top )
+      .attr("stroke", "black")
+
+      svg
+      .select("#upperline")
+      .transition()
+      .duration(1100)
+      .attr("x1", (svgwidth-innerrectwidth)/2 - margin.left)
+      .attr("x2", (svgwidth+innerrectwidth)/2 - margin.left)
+      .attr("y1", yScale(upper) +margin.top)
+      .attr("y2", yScale(upper) +margin.top )
+      .attr("stroke", "black")
+
+      svg
+      .select("#medianline")
+      .transition()
+      .duration(1100)
+      .attr("x1", (svgwidth-innerrectwidth)/2 - margin.left)
+      .attr("x2", (svgwidth+innerrectwidth)/2 - margin.left)
+      .attr("y1", yScale(median)+margin.top )
+      .attr("y2", yScale(median)+margin.top )
+      .attr("stroke", "black")
+
+      svg
+      .select("#lowerline")
+      .transition()
+      .duration(1100)
+      .attr("x1", (svgwidth-innerrectwidth)/2 - margin.left)
+      .attr("x2", (svgwidth+innerrectwidth)/2 - margin.left)
+      .attr("y1", yScale(lower) +margin.top)
+      .attr("y2", yScale(lower) +margin.top )
+      .attr("stroke", "black")
+
+      svg
+      .select("#rectbox")
+      .transition()
+      .duration(1100)
+      .attr("x", mid - width/2 - margin.left)
+      .attr("y", yScale(q3) + margin.top)
+      .attr("height", (yScale(q1)-yScale(q3)) )
+      .attr("width", width )
+      .attr("stroke", "black")
+      .style("fill", "#red")
+
+
+
+		}
+
+    var updatepointswithouttransitions = function() {
+
+      var unsortedpoints = d3.selectAll('circle').data();
+      var points = unsortedpoints.sort(d3.ascending);
+
+      thepoints.text(function() {return 'Data Values:' + points;});
+
+      var q3 = d3.quantile(points,.75);
+      var median = d3.quantile(points,.5);
+      var q1 = d3.quantile(points,.25);
+      var iqr = Math.abs(q3-q1);
+      var lower = points.filter(function(x) {return (x >= q1-(1.5*iqr))})[0]
+      var upper = points.filter(function(x) {return (x <= q3+(1.5*iqr))})[points.length-1]
+      var outliers = points.filter(function(x) {return (x > q3+(1.5*iqr) || x < q1-(1.5*iqr))});
+
+      themedian.text(function() {return 'Median: ' + median});
+      theq1.text(function() {return 'Q1: ' + q1});
+      theq3.text(function() {return 'Q3: ' + q3});
+      theouliers.text(function() {return 'Outliers:' + outliers});
+      thelower.text(function() {return 'Lower Whisker:' + lower});
+      theupper.text(function() {return 'Upper Whisker:' + upper});
+
+
+      d3.selectAll('circle')
+      .style("fill", function(x) {
+            if (x > q3+(1.5*iqr) || x < q1-(1.5*iqr)) {return "lightblue"}
+            else 	{ return "black" }
+        ;});
+
+
+      svg
+      .select("#vertline")
+      .attr("x1", mid - margin.left)
+      .attr("x2", mid - margin.left)
+      .attr("y1", yScale(lower) + margin.top)
+      .attr("y2", yScale(upper) + margin.top)
+      .attr("stroke", "black")
+
+      svg
+      .select("#upperline")
+      .attr("x1", (svgwidth-innerrectwidth)/2 - margin.left)
+      .attr("x2", (svgwidth+innerrectwidth)/2 - margin.left)
+      .attr("y1", yScale(upper) + margin.top)
+      .attr("y2", yScale(upper) + margin.top)
+      .attr("stroke", "black")
+
+      svg
+      .select("#medianline")
+      .attr("x1", (svgwidth-innerrectwidth)/2 - margin.left)
+      .attr("x2", (svgwidth+innerrectwidth)/2 - margin.left)
+      .attr("y1", yScale(median) + margin.top)
+      .attr("y2", yScale(median) + margin.top)
+      .attr("stroke", "black")
+
+      svg
+      .select("#lowerline")
+      .attr("x1", (svgwidth-innerrectwidth)/2 - margin.left)
+      .attr("x2", (svgwidth+innerrectwidth)/2 - margin.left)
+      .attr("y1", yScale(lower) + margin.top)
+      .attr("y2", yScale(lower) + margin.top )
+      .attr("stroke", "black")
+
+      svg
+      .select("#rectbox")
+      .attr("x", mid - width/2 - margin.left)
+      .attr("y", yScale(q3) + margin.top)
+      .attr("height", (yScale(q1)-yScale(q3)) )
+      .attr("width", width )
+      .attr("stroke", "black")
+      .style("fill", "#red")
+
+
+
+    }
+
+    var getridofeverything = function(){
+      svg
+      .select("#vertline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black");
+
+      svg
+      .select("#rectbox")
+      .attr("x", mid - width/2)
+      .attr("y", svgheight/2 )
+      .attr("height", 0 )
+      .attr("width", 0 )
+      .attr("stroke", "black")
+      .style("fill", "#red")
+      .style("pointer-events", "none");
+
+      svg
+      .select("#medianline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black")
+
+      svg
+      .select("#upperline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black")
+
+      svg
+      .select("#lowerline")
+      .attr("x1", mid)
+      .attr("x2", mid)
+      .attr("y1", svgheight/2 )
+      .attr("y2", svgheight/2 )
+      .attr("stroke", "black")
+    }
+
+		</script>
+
+	</body>
+
+</html>
