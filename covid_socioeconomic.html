@@ -13124,13 +13124,15 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>COVID-19 has shut down much of America, but who has been affected the most?</p>
-<p>To answer this question, I examined <a href="https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html#g-cases-by-county">county-level COVID-19 data</a> that was readily available, and paired it with county-level demographic data estimates from the 2018 American Community Survey.</p>
+<p>To answer this question, I examined <a href="https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html#g-cases-by-county">the New York Times' county-level COVID-19 data</a>, and paired it with county-level demographic data estimates from the 2018 American Community Survey.</p>
+<p>The goal is to get an idea of whether or not American counties with certain demographic characteristics tend to have more positive COVID-19 tests.</p>
 <p>There are a few important caveats here:</p>
 <ul>
 <li>COVID-19 data is believed to be highly inaccurate, and may be better in areas with certain demographics (skewing this data), perhaps due to more widespread testing and case tracing</li>
 <li>On a similar note, many cases in some states have not been assigned to a county, and have a county label as "unknown"; thus, while examining data at the county level gives us the power of granularity, there is some information loss</li>
 <li>The vast majority of counties have zero reported cases - thus, we will consider two datasets, one including those zero values, and one not including those zero values.</li>
 </ul>
+<p>It's important to note that this analysis is an estimation - I am <em>not</em> using data that tells us the exact characteristics of who has tested positive for the virus. This disease is fairly new and growing quickly, so this information isn't readily available yet. This analysis serves as an alternate method of estimating which groups may be most affected by COVID-19.</p>
 <p>My findings are presented below.</p>
 
 </div>
@@ -13261,7 +13263,8 @@ div#notebook {
 <h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2><p>I will use a log scale for COVID-19 cases, in order to properly reflect that they are growing exponentially. In short, this will allow us to better gauge the relationship between prevalence of reported COVID-19 cases and prevalence of certain demographic groups.</p>
 <p>I'll also normalize infection totals by county population, so we get infection rates, rather than raw numbers of infections.</p>
 <p>For reference while reading these results: <em>correlations</em> range on a constant scale from -1 (perfectly negatively correlated), to 0 (absolutely no correlation), to 1 (perfectly positively correlated) - which is to say if a value is very close to zero, two factors are not correlated. Generally, a correlation would need to be at or above .3 or at or below -.3 for us to consider it at least moderately significant.</p>
-<p>It is vital to note that correlation does <em>not</em> imply causation - we are simply noting that areas with certain demographics tend to have higher (or lower) reported infection rates (and again, these are <em>reported</em>, <em>county-assigned</em> infections). Also, we're using classic linear correlations (Pearson correlations) with an exponential transformation on the number of cases, which is only one kind of correlation - just because we don't find a relationship here doesn't mean necessarily mean one doesn't exist.</p>
+<p>It is vital to note that correlation does <em>not</em> imply causation - we are simply noting that areas with certain demographics tend to have higher (or lower) reported infection rates (and again, these are <em>reported</em>, <em>county-assigned</em> infections), not definitely stating that certain groups are infected by the virus more frequently than others.</p>
+<p>Also, we're using classic linear correlations (Pearson correlations) with an exponential transformation on the number of cases, which is only one kind of correlation - so just because we don't find a relationship here doesn't mean necessarily mean one doesn't exist.</p>
 
 </div>
 </div>
