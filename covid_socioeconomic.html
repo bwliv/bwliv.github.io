@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Which Socioeconomic Groups Are Most Affected By COVID-19?</title>
+<title>covid-socioeconomic</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,7 +13116,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Which-Socioeconomic-Groups-Are-Most-Affected-By-COVID-19?">Which Socioeconomic Groups Are Most Affected By COVID-19?<a class="anchor-link" href="#Which-Socioeconomic-Groups-Are-Most-Affected-By-COVID-19?">&#182;</a></h1><h3 id="By-Benjamin-Livingston">By Benjamin Livingston<a class="anchor-link" href="#By-Benjamin-Livingston">&#182;</a></h3><h3 id="March-22,-2020">March 22, 2020<a class="anchor-link" href="#March-22,-2020">&#182;</a></h3>
+<h1 id="Which-Socioeconomic-Groups-Are-Most-Affected-By-COVID-19?">Which Socioeconomic Groups Are Most Affected By COVID-19?<a class="anchor-link" href="#Which-Socioeconomic-Groups-Are-Most-Affected-By-COVID-19?">&#182;</a></h1><h3 id="By-Benjamin-Livingston">By Benjamin Livingston<a class="anchor-link" href="#By-Benjamin-Livingston">&#182;</a></h3><h3 id="March-25,-2020">March 25, 2020<a class="anchor-link" href="#March-25,-2020">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13147,7 +13147,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import packages</span>
@@ -13160,14 +13160,14 @@ div#notebook {
 <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;2988f01f5e86175bda8beae2b5035e1ccef2d052&#39;</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Pairing New York Times COVID-19 data from afternoon of 3/22</span>
+<span class="sd">Pairing New York Times COVID-19 data from afternoon of 3/25 with census response data from same period</span>
 
 <span class="sd">NYT source:</span>
 <span class="sd">https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html#g-cases-by-county</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># read COVID-19 data</span>
-<span class="n">covid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;covid_data.csv&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ISO-8859–1&quot;</span><span class="p">)</span>
+<span class="n">covid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;covid_data_new_325_1203pm.csv&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ISO-8859–1&quot;</span><span class="p">)</span>
 
 <span class="c1"># integrate state abbreviations </span>
 <span class="n">state_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;state_abbreviations.csv&#39;</span><span class="p">)</span>
@@ -13189,17 +13189,17 @@ div#notebook {
 <span class="c1"># pull population data to incorporate</span>
 <span class="n">populations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B01003_001E&#39;</span><span class="p">,</span><span class="s1">&#39;B02001_002E&#39;</span><span class="p">,</span><span class="s1">&#39;B02001_003E&#39;</span><span class="p">,</span><span class="s1">&#39;B02017_001E&#39;</span><span class="p">,</span>\
                                     <span class="s1">&#39;B02001_005E&#39;</span><span class="p">,</span><span class="s1">&#39;B02001_006E&#39;</span><span class="p">,</span><span class="s1">&#39;B02001_007E&#39;</span><span class="p">,</span><span class="s1">&#39;B02001_008E&#39;</span><span class="p">,</span>\
-                                    <span class="s1">&#39;B03002_012E&#39;</span><span class="p">,</span><span class="s1">&#39;B18101C_002E&#39;</span><span class="p">,</span><span class="s1">&#39;B05001_006E&#39;</span><span class="p">,</span><span class="s1">&#39;B06004E_005E&#39;</span><span class="p">,</span>\
-                                    <span class="s1">&#39;B17020E_002E&#39;</span><span class="p">,</span><span class="s1">&#39;B08519_009E&#39;</span><span class="p">,</span><span class="s1">&#39;county&#39;</span><span class="p">,</span><span class="s1">&#39;state&#39;</span><span class="p">])</span>
+                                    <span class="s1">&#39;B03002_012E&#39;</span><span class="p">,</span><span class="s1">&#39;C18108_002E&#39;</span><span class="p">,</span><span class="s1">&#39;B05001_006E&#39;</span><span class="p">,</span><span class="s1">&#39;B99051_005E&#39;</span><span class="p">,</span>\
+                                    <span class="s1">&#39;B17001_002E&#39;</span><span class="p">,</span><span class="s1">&#39;B08519_009E&#39;</span><span class="p">,</span><span class="s1">&#39;county&#39;</span><span class="p">,</span><span class="s1">&#39;state&#39;</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">79</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://api.census.gov/data/2018/acs/acs5?get=B01003_001E,B02001_002E,B02001_003E,B02017_001E,&#39;</span>\
-        <span class="o">+</span><span class="s1">&#39;B02001_005E,B02001_006E,B02001_007E,B02001_008E,B03002_012E,B18101C_002E,B05001_006E,B06004E_005E,&#39;</span>\
-        <span class="o">+</span><span class="n">f</span><span class="s1">&#39;B17020E_002E,B08519_009E&amp;key=</span><span class="si">{key}</span><span class="s1">&amp;for=county:*&amp;in=state:0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="o">+</span><span class="s1">&#39;B02001_005E,B02001_006E,B02001_007E,B02001_008E,B03002_012E,C18108_002E,B05001_006E,B99051_005E,&#39;</span>\
+        <span class="o">+</span><span class="n">f</span><span class="s1">&#39;B17001_002E,B08519_009E&amp;key=</span><span class="si">{key}</span><span class="s1">&amp;for=county:*&amp;in=state:0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://api.census.gov/data/2018/acs/acs5?get=B01003_001E,B02001_002E,B02001_003E,B02017_001E,&#39;</span>\
-        <span class="o">+</span><span class="s1">&#39;B02001_005E,B02001_006E,B02001_007E,B02001_008E,B03002_012E,B18101C_002E,B05001_006E,B06004E_005E,&#39;</span>\
-        <span class="o">+</span><span class="n">f</span><span class="s1">&#39;B17020E_002E,B08519_009E&amp;key=</span><span class="si">{key}</span><span class="s1">&amp;for=county:*&amp;in=state:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="o">+</span><span class="s1">&#39;B02001_005E,B02001_006E,B02001_007E,B02001_008E,B03002_012E,C18108_002E,B05001_006E,B99051_005E,&#39;</span>\
+        <span class="o">+</span><span class="n">f</span><span class="s1">&#39;B17001_002E,B08519_009E&amp;key=</span><span class="si">{key}</span><span class="s1">&amp;for=county:*&amp;in=state:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
@@ -13273,7 +13273,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="All-Counties">All Counties<a class="anchor-link" href="#All-Counties">&#182;</a></h3><p>Factoring in <em>all counties</em> - not just those with reported cases - we see a few interesting trends.</p>
-<p>More populous counties tend to have lower reported infection rates - there's a moderate correlation there. This could be because:</p>
+<p>More populous counties tend to have lower reported infection rates - there's a weak-to-moderate correlation there. This could be because:</p>
 <ul>
 <li>More populous areas are less prone to infection</li>
 <li>More populous areas have more difficulty robustly testing their large population</li>
@@ -13282,16 +13282,17 @@ div#notebook {
 </ul>
 <p>...but we can't say for sure.</p>
 <p>We don't see too much correlation between prevalence of certain racial groups and rate of reported COVID-19 infections, except for American Indians &amp; Alaska Natives (AIAN) - perhaps their natural social distancing and distance from population centers could be an asset here.</p>
-<p>While the correlation is weak, it is interesting to note that areas with more minors tend to have have slightly lower infection rates, which is unsurprising given that COVID-19 is well-known to have a greater effect on older adults, which may lead to adult cases being reported more frequently.</p>
-<p>It is also worth noting that we do not observe a positive correlation between prevalence of foreign-born populations and prevalence of reported COVID-19 infections.</p>
-<p>Generally, outside of the AIAN population, racial and economic demographics seem to correlate little with COVID-19 infection rates.</p>
+<p>While the correlation is quite weak, it is interesting to note that areas with more minors tend to have have very slightly lower infection rates, which is unsurprising given that COVID-19 is well-known to have a greater effect on older adults, which may lead to adult cases being reported more frequently.</p>
+<p>It is also worth noting that we observe the correlation between prevalence of foreign-born populations and prevalence of reported COVID-19 infections is positive, but very, very slight.</p>
+<p>Finally, we note the negative correlation between poverty and prevalence of positive COVID-19 tests - while this number is not extremely significant, it would stand in line with the belief that underprivileged citizens are not receiving proper testing.</p>
+<p>However... it seems that, generally, outside of the AIAN population, racial and economic demographics seem to correlate little with COVID-19 infection rates.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">with_unreported_log</span> <span class="o">=</span> <span class="n">with_unreported</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -13313,7 +13314,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[53]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -13342,59 +13343,59 @@ div#notebook {
   <tbody>
     <tr>
       <th>population</th>
-      <td>-0.33</td>
+      <td>-0.25</td>
     </tr>
     <tr>
       <th>white</th>
-      <td>0.12</td>
+      <td>0.11</td>
     </tr>
     <tr>
       <th>black</th>
-      <td>-0.09</td>
+      <td>-0.12</td>
     </tr>
     <tr>
       <th>AIAN</th>
-      <td>-0.31</td>
+      <td>-0.23</td>
     </tr>
     <tr>
       <th>asian</th>
-      <td>-0.05</td>
+      <td>-0.03</td>
     </tr>
     <tr>
       <th>pacific_islander</th>
-      <td>-0.02</td>
-    </tr>
-    <tr>
-      <th>other_race</th>
-      <td>-0.11</td>
-    </tr>
-    <tr>
-      <th>multiracial</th>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>hispanic</th>
       <td>0.02</td>
     </tr>
     <tr>
+      <th>other_race</th>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.08</td>
+    </tr>
+    <tr>
       <th>under18</th>
-      <td>-0.19</td>
+      <td>-0.13</td>
     </tr>
     <tr>
       <th>noncitizen</th>
-      <td>-0.06</td>
+      <td>-0.10</td>
     </tr>
     <tr>
       <th>foreign_born</th>
-      <td>-0.15</td>
+      <td>0.14</td>
     </tr>
     <tr>
       <th>below_poverty_level</th>
-      <td>-0.06</td>
+      <td>-0.20</td>
     </tr>
     <tr>
       <th>make_over_75k</th>
-      <td>0.06</td>
+      <td>-0.05</td>
     </tr>
   </tbody>
 </table>
@@ -13418,7 +13419,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">without_unreported_log</span> <span class="o">=</span> <span class="n">without_unreported</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -13440,7 +13441,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[52]:</div>
+    <div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -13469,59 +13470,59 @@ div#notebook {
   <tbody>
     <tr>
       <th>population</th>
-      <td>-0.02</td>
+      <td>0.06</td>
     </tr>
     <tr>
       <th>white</th>
-      <td>-0.08</td>
+      <td>-0.18</td>
     </tr>
     <tr>
       <th>black</th>
-      <td>0.07</td>
+      <td>0.17</td>
     </tr>
     <tr>
       <th>AIAN</th>
-      <td>0.05</td>
+      <td>0.11</td>
     </tr>
     <tr>
       <th>asian</th>
-      <td>-0.04</td>
+      <td>-0.01</td>
     </tr>
     <tr>
       <th>pacific_islander</th>
-      <td>0.04</td>
+      <td>0.02</td>
     </tr>
     <tr>
       <th>other_race</th>
-      <td>-0.10</td>
+      <td>-0.09</td>
     </tr>
     <tr>
       <th>multiracial</th>
-      <td>0.03</td>
+      <td>-0.01</td>
     </tr>
     <tr>
       <th>hispanic</th>
-      <td>-0.05</td>
+      <td>-0.06</td>
     </tr>
     <tr>
       <th>under18</th>
-      <td>0.04</td>
+      <td>0.07</td>
     </tr>
     <tr>
       <th>noncitizen</th>
-      <td>-0.03</td>
+      <td>0.18</td>
     </tr>
     <tr>
       <th>foreign_born</th>
-      <td>0.16</td>
+      <td>0.01</td>
     </tr>
     <tr>
       <th>below_poverty_level</th>
-      <td>-0.04</td>
+      <td>0.11</td>
     </tr>
     <tr>
       <th>make_over_75k</th>
-      <td>0.05</td>
+      <td>-0.09</td>
     </tr>
   </tbody>
 </table>
@@ -13538,7 +13539,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>Based on a cursory look at this data, prevalence of reported COVID-19 cases does not appear to correlate significantly with most basic socioeconomic factors such as race and income.</p>
-<p>We see a few trends that would make sense in context - perhaps there are fewer reported cases in more populous areas that are struggling to keep up with the need for tests, remote native populations are less affected, and areas with more minors are less affected, etc. - but we can't say any of this for sure.</p>
+<p>We see a few trends that would make sense in context - perhaps there are fewer reported cases in more populous areas that are struggling to keep up with the need for tests, remote native populations are less affected, and areas with more minors are less affected, etc. - but we can't say any of this for sure, especially given the weakness of the correlations.</p>
 <p>That being said, while further calculations and much more robust data would be needed to make more definitive statements, the data we have so far does not suggest that COVID-19 cases are popping up among areas with certain socioeconomic characteristics more than others - that is, at least among those cases that have been reported.</p>
 
 </div>
