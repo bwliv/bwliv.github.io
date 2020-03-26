@@ -13904,7 +13904,8 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Looking-For-Confounding-Variables">Looking For Confounding Variables<a class="anchor-link" href="#Looking-For-Confounding-Variables">&#182;</a></h2><p>We know that <a href="https://bwliv.github.io/undercount_modeling">census response rates tend to vary in areas with different demographics</a>.</p>
 <p>With that in mind, I looked across all counties in our dataset to see if prevalence of COVID-19 still negatively correlated with the "overall" census response rates after conditioning on several demographic factors.</p>
-<p>In other words, is this a real relationship, and not a mirage simply caused by the demographics of certain areas?</p>
+<p>To do that, we will examine <em>partial correlations</em> - which are similar to correlations in that they look for a relationship, but instead ask "<em>controlling for everything else here</em>, is there a relationship?"</p>
+<p>In other words, is there a real relationship between reported COVID-19 cases and census response rates, and not one that's simply a mirage caused by the demographics of counties?</p>
 <p>Generally, if the latter was true, these two variables would have a partial correlation close to zero (as pretty much all the demographic factors do) - and as you can see below, that wasn't the case, so these demographic factors do not appear to be behind the negative correlation between COVID-19 prevalence and census response rates.</p>
 
 </div>
