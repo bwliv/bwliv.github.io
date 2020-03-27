@@ -13230,7 +13230,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2><p>I will use a log scale for COVID-19 cases, in order to properly reflect that they are growing exponentially. In short, this will allow us to better gauge the relationship between prevalence of reported COVID-19 cases and prevalence of certain demographic groups.</p>
 <p>I'll also normalize infection totals by county population, so we get infection rates, rather than raw numbers of infections.</p>
-<p>For reference while reading these results: <em>correlations</em> range on a constant scale from -1 (perfectly negatively correlated), to 0 (absolutely no correlation), to 1 (perfectly positively correlated) - which is to say if a value is very close to zero, two factors are not correlated. Generally, a correlation would need to be at or above .3 or at or below -.3 for us to consider it at least moderately significant.</p>
+<p>For reference while reading these results: <em>correlations</em> range on a constant scale from -1 (perfectly negatively correlated), to 0 (absolutely no correlation), to 1 (perfectly positively correlated) - which is to say if a value is very close to zero, two factors are not correlated. Generally, a correlation would need to be at or above .3 or at or below -.3 for us to consider it at least moderately substantial.</p>
 <p>It is vital to note that correlation does <em>not</em> imply causation - we are simply noting that areas with certain demographics tend to have higher (or lower) reported infection rates (and again, these are <em>reported</em>, <em>county-assigned</em> infections), not definitely stating that certain groups are infected by the virus more frequently than others.</p>
 <p>Also, we're using classic linear correlations (Pearson correlations) with an exponential transformation on the number of cases, which is only one kind of correlation - so just because we don't find a relationship here doesn't mean necessarily mean one doesn't exist.</p>
 
@@ -13499,7 +13499,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Nearly all of these p-values are vitually zero, which means we expect there would be virtually zero chance of seeing this data if there was no relationship between these socioeconomic factors and prevalence of reported COVID-19 cases.</p>
-<p>Except for the 'other race', 'two or more races', and 'make over $75,000 a year' categories (which do not appear to be significant), we would very clearly consider the rest of these relationships to be significant at just about any reasonable level of significance.</p>
+<p>Except for the 'other race', 'two or more races', and 'make over $75,000 a year' categories (which do not appear to be statistically significant), we would very clearly consider the rest of these relationships to be statistically significant at just about any reasonable level of significance - although it is important to note that the relationship being statistically significant doesn't necessarily imply that it's strong.</p>
 
 </div>
 </div>
@@ -13507,8 +13507,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>Our tests have shown a weak-but-significant (and in many cases, a very-weak-but-significant) correlation between basic socioeconomic factors and prevalence of reported COVID-19 cases.</p>
-<p>While further calculations and much more robust data would be needed to make more definitive statements, the data we have so far suggests that COVID-19 cases are indeed popping up among areas with certain socioeconomic characteristics more than others (that is, at least among those cases that have been reported), but these relationships are pretty weak.</p>
+<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>Our tests have shown a weak-but-statistically-significant (and in many cases, a very-weak-but-statistically-significant) correlation between basic socioeconomic factors and prevalence of reported COVID-19 cases.</p>
+<p>While further calculations and much more robust data would be needed to make more definitive statements, the data we have so far suggests that COVID-19 cases are indeed popping up very slightly more among areas with certain socioeconomic characteristics more than others (that is, at least among those cases that have been reported) - but, again, these relationships are pretty weak.</p>
 
 </div>
 </div>
