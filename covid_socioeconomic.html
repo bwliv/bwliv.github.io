@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Is COVID-19 Affecting Some Socioeconomic Groups More Than Others?</title>
+<title># Is COVID-19 Affecting Some Socioeconomic Groups More Than Others?</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,7 +13116,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Is-COVID-19-Affecting-Some-Socioeconomic-Groups-More-Than-Others?">Is COVID-19 Affecting Some Socioeconomic Groups More Than Others?<a class="anchor-link" href="#Is-COVID-19-Affecting-Some-Socioeconomic-Groups-More-Than-Others?">&#182;</a></h1><h3 id="By-Benjamin-Livingston">By Benjamin Livingston<a class="anchor-link" href="#By-Benjamin-Livingston">&#182;</a></h3><h3 id="March-27,-2020">March 27, 2020<a class="anchor-link" href="#March-27,-2020">&#182;</a></h3>
+<h1 id="Is-COVID-19-Affecting-Some-Socioeconomic-Groups-More-Than-Others?">Is COVID-19 Affecting Some Socioeconomic Groups More Than Others?<a class="anchor-link" href="#Is-COVID-19-Affecting-Some-Socioeconomic-Groups-More-Than-Others?">&#182;</a></h1><h3 id="By-Benjamin-Livingston">By Benjamin Livingston<a class="anchor-link" href="#By-Benjamin-Livingston">&#182;</a></h3><h3 id="April-4,-2020">April 4, 2020<a class="anchor-link" href="#April-4,-2020">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13141,7 +13141,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[151]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import packages</span>
@@ -13230,7 +13230,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2><p>I will use a log scale for COVID-19 cases, in order to properly reflect that they are growing exponentially. In short, this will allow us to better gauge the relationship between prevalence of reported COVID-19 cases and prevalence of certain demographic groups.</p>
 <p>I'll also normalize infection totals by county population, so we get infection rates, rather than raw numbers of infections.</p>
-<p>For reference while reading these results: <em>correlations</em> range on a constant scale from -1 (perfectly negatively correlated), to 0 (absolutely no correlation), to 1 (perfectly positively correlated) - which is to say if a value is very close to zero, two factors are not correlated. Generally, a correlation would need to be at or above .3 or at or below -.3 for us to consider it at least moderately substantial.</p>
+<p>For reference while reading these results: <em>correlations</em> range on a constant scale from -1 (perfectly negatively correlated), to 0 (absolutely no correlation), to 1 (perfectly positively correlated) - which is to say if a value is very close to zero, two factors are not correlated. Generally, a correlation would need to be at or above .3 or at or below -.3 for us to consider it anything more than weak.</p>
 <p>It is vital to note that correlation does <em>not</em> imply causation - we are simply noting that areas with certain demographics tend to have higher (or lower) reported infection rates (and again, these are <em>reported</em>, <em>county-assigned</em> infections), not definitely stating that certain groups are infected by the virus more frequently than others.</p>
 <p>Also, we're using classic linear correlations (Pearson correlations) with an exponential transformation on the number of cases, which is only one kind of correlation - so just because we don't find a relationship here doesn't mean necessarily mean one doesn't exist.</p>
 
@@ -13239,7 +13239,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[152]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">full_data_log</span> <span class="o">=</span> <span class="n">full_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -13260,7 +13260,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[152]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -13289,59 +13289,59 @@ div#notebook {
   <tbody>
     <tr>
       <th>population</th>
-      <td>0.13</td>
+      <td>0.19</td>
     </tr>
     <tr>
       <th>white</th>
-      <td>-0.08</td>
+      <td>-0.16</td>
     </tr>
     <tr>
       <th>black</th>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>AIAN</th>
-      <td>0.18</td>
-    </tr>
-    <tr>
-      <th>asian</th>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>pacific_islander</th>
-      <td>-0.05</td>
-    </tr>
-    <tr>
-      <th>other_race</th>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>multiracial</th>
-      <td>0.01</td>
-    </tr>
-    <tr>
-      <th>hispanic</th>
-      <td>-0.12</td>
-    </tr>
-    <tr>
-      <th>under18</th>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>noncitizen</th>
       <td>0.21</td>
     </tr>
     <tr>
+      <th>AIAN</th>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>-0.13</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.22</td>
+    </tr>
+    <tr>
+      <th>under18</th>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.18</td>
+    </tr>
+    <tr>
       <th>foreign_born</th>
-      <td>-0.20</td>
+      <td>-0.24</td>
     </tr>
     <tr>
       <th>below_poverty_level</th>
-      <td>0.15</td>
+      <td>0.18</td>
     </tr>
     <tr>
       <th>make_over_75k</th>
-      <td>-0.02</td>
+      <td>0.03</td>
     </tr>
   </tbody>
 </table>
@@ -13357,7 +13357,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>These are all weak-at-best correlations, indicating that even where there might be a relationship, it's a weak one.</p>
+<p>These are all weak-at-best correlations, indicating that even where there might be a relationship between socioeconomic factors and prevalence of reported COVID-19 cases, it's not incredibly strong - but there's an important caveat to that we'll mention towards the end.</p>
 <h2 id="Testing">Testing<a class="anchor-link" href="#Testing">&#182;</a></h2><p>We'll now run hypothesis tests, seeing if we can reject our null hypothesis that none of these factors significantly correlate with the (log-scaled) number of reported COVID-19 cases.</p>
 <p>We'll use the standard 95% level of significance.</p>
 
@@ -13366,7 +13366,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[153]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="k">import</span> <span class="n">ols</span>
@@ -13397,7 +13397,27 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[153]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\Users\bwliv\Anaconda3\lib\site-packages\statsmodels\compat\pandas.py:49: FutureWarning: The Panel class is removed from pandas. Accessing it from the top-level namespace will also be removed in the next version
+  data_klasses = (pandas.Series, pandas.DataFrame, pandas.Panel)
+C:\Users\bwliv\Anaconda3\lib\site-packages\statsmodels\base\data.py:480: FutureWarning: 
+.ix is deprecated. Please use
+.loc for label based indexing or
+.iloc for positional indexing
+
+See the documentation here:
+http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#ix-indexer-is-deprecated
+  if hasattr(x, &#39;ix&#39;):
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -13446,19 +13466,19 @@ div#notebook {
     </tr>
     <tr>
       <th>asian</th>
-      <td>0.000</td>
+      <td>0.012</td>
     </tr>
     <tr>
       <th>pacific_islander</th>
-      <td>0.004</td>
+      <td>0.000</td>
     </tr>
     <tr>
       <th>other_race</th>
-      <td>0.906</td>
+      <td>0.583</td>
     </tr>
     <tr>
       <th>multiracial</th>
-      <td>0.428</td>
+      <td>0.009</td>
     </tr>
     <tr>
       <th>hispanic</th>
@@ -13482,7 +13502,7 @@ div#notebook {
     </tr>
     <tr>
       <th>make_over_75k</th>
-      <td>0.340</td>
+      <td>0.100</td>
     </tr>
   </tbody>
 </table>
@@ -13499,7 +13519,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Nearly all of these p-values are vitually zero, which means we expect there would be virtually zero chance of seeing this data if there was no relationship between these socioeconomic factors and prevalence of reported COVID-19 cases.</p>
-<p>Except for the 'other race', 'two or more races', and 'make over $75,000 a year' categories (which do not appear to be statistically significant), we would very clearly consider the rest of these relationships to be statistically significant at just about any reasonable level of significance - although it's important to note that a relationship being statistically significant doesn't necessarily imply that it's strong.</p>
+<p>Except for the 'other race', 'two or more races', and 'make over $75,000 a year' categories (which do not appear to be significant), we would very clearly consider the rest of these relationships to be significant at just about any reasonable level of significance.</p>
 
 </div>
 </div>
@@ -13507,8 +13527,9 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>Our tests have shown a weak-but-statistically-significant (and in many cases, a very-weak-but-statistically-significant) correlation between basic socioeconomic factors and prevalence of reported COVID-19 cases.</p>
-<p>While further calculations and much more robust data would be needed to make more definitive statements, the data we have so far suggests that COVID-19 cases are indeed popping up very slightly more among areas with certain socioeconomic characteristics (that is, at least among those cases that have been reported) - but, again, these relationships are hardly strong ones. They imply mild - not large - divides in COVID-19 prevalence among areas with differing socioeconomic characteristics.</p>
+<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>Our tests have shown a weak-but-significant correlation between basic socioeconomic factors and prevalence of reported COVID-19 cases.</p>
+<p>However, the key caveat here is this only deals with <em>reported</em> cases. It's possible that these relationships are much stronger than the data suggests, as cases among poorer populations are believed to be more commonly unreported.</p>
+<p>While further calculations and much more robust data would be needed to make more definitive statements, the data we have so far suggests that COVID-19 cases are indeed popping up among areas with certain socioeconomic characteristics more than others (that is, at least among those cases that have been reported), although it is difficult to say how strong these relationships are.</p>
 
 </div>
 </div>
