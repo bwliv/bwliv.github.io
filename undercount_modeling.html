@@ -13116,17 +13116,18 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Why-Is-Your-Region-Hard-To-Count?">Why Is Your Region Hard To Count?<a class="anchor-link" href="#Why-Is-Your-Region-Hard-To-Count?">&#182;</a></h1><h3 id="By-Benjamin-Livingston,-NewsCounts">By Benjamin Livingston, <a href="http://newscounts.org"><em>NewsCounts</em></a><a class="anchor-link" href="#By-Benjamin-Livingston,-NewsCounts">&#182;</a></h3>
+<h1 id="Why-Is-Your-Region-Hard-To-Count?">Why Is Your Region Hard To Count?<a class="anchor-link" href="#Why-Is-Your-Region-Hard-To-Count?">&#182;</a></h1><h3 id="By-Benjamin-Livingston,-NewsCounts">By Benjamin Livingston, <a href="http://newscounts.org"><em>NewsCounts</em></a><a class="anchor-link" href="#By-Benjamin-Livingston,-NewsCounts">&#182;</a></h3><h3 id="April-9,-2020">April 9, 2020<a class="anchor-link" href="#April-9,-2020">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>"Hard to count" is a popular buzzphrase as the 2020 US Census takes shape - but what does it mean for your region?</p>
-<p>As a journalist, you probably have a great idea of your area's demographic makeup, and what groups <em>might</em> be particularly hard-to-count - but it's difficult to quantify.</p>
-<p><em>NewsCounts</em> has built a tool that will allow you to do this - <strong>and we're prepared to tailor it for your newsroom using both 2010 and up-to-date 2020 data.</strong></p>
-<p>By compiling demographic and mail response data from the 2010 and 2020 censuses, we've developed a model for what makes an area hard-to-count, and are prepared to tailor it to your newsroom.</p>
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>"Hard to count" is a popular buzzphrase as the 2020 US Census takes shape - but what does it mean for your region?</p>
+<p>As a journalist, you probably have a great feel for your area's demographic makeup, and which groups <em>might</em> be particularly hard-to-count - but it's difficult to quantify.</p>
+<p><em>NewsCounts</em> has built a workflow that will allow you to do this - <strong>and we're prepared to tailor it for your newsroom using both 2010 and up-to-date 2020 data.</strong> It's an easy, compelling template for a story on demographics and census response rates.</p>
+<p>It's worth noting that the way the public engages with the census has changed significantly from 2010 to 2020, between the <a href="https://2020census.gov/en/ways-to-respond.html">addition of an online response option in 2020</a>, <a href="https://www.census.gov/newsroom/press-releases/2020/update-on-2020-census-field-operations.html">the outbreak of COVID-19</a>, and the evolution of the nation and its government over the last ten years.</p>
+<p>By compiling demographic and response data from the 2010 and 2020 censuses, we have developed an idea of what makes various areas hard-to-count, and are prepared to tailor this analysis for your newsroom and its audience.</p>
 
 </div>
 </div>
@@ -13134,9 +13135,11 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-We'll-Do-Here">What We'll Do Here<a class="anchor-link" href="#What-We'll-Do-Here">&#182;</a></h2><p>We'll start by examining which factors made the nation as a whole hard-to-count in 2010.</p>
-<p>To do this, we will look at basic tract-level data from the 2010 decennial census and five-year American Community Survey estimates (also from 2010), and use them as a means of modeling exactly <em>why</em> America is hard-to-count.</p>
+<h2 id="What-We'll-Do-Here">What We'll Do Here<a class="anchor-link" href="#What-We'll-Do-Here">&#182;</a></h2><p>We'll start by examining which factors made the nation as a whole hard-to-count in 2010, and then compare it to what appears to be happening in 2020.</p>
+<p>To do this, we will look at basic tract-level data from the 2010 decennial census and five-year American Community Survey estimates from 2010 and 2018, and use them as a means of modeling exactly <em>why</em> America's 50 states (plus the District of Columbia) seemed to be hard-to-count in 2010, and seem to be hard-to-count in 2020.</p>
 <p>We'll then move to a more granular analysis that demostrates how the story might change in your local area, and how you can tell that story.</p>
+<p>Unfortunately, we won't be able to say whether response rates are generally higher or lower overall quite yet, as this year's census is far from complete.</p>
+<p>However, the census' new daily response data is extremely valuable for articles. If you need that up-to-date response rate information to pair with this, there's information on obtaining it <a href="#Contact-Info-&amp;amp;-Other-Resources">at the end of this guide</a>.</p>
 
 </div>
 </div>
@@ -13144,13 +13147,23 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Methodology">Methodology<a class="anchor-link" href="#Methodology">&#182;</a></h2><p>To do this, we used three highly interpretable models that allow us to glean which demographic factors correlate most with counting difficulties:</p>
+<h2 id="Technical-Details">Technical Details<a class="anchor-link" href="#Technical-Details">&#182;</a></h2><h3 id="Modeling">Modeling<a class="anchor-link" href="#Modeling">&#182;</a></h3><p>To accomplish our goal, we used two highly interpretable models that allow us to glean which demographic factors correlate most with counting difficulties:</p>
 <ul>
 <li>A basic linear model that simply calculates the linear correlation between each demographic factor and undercounting</li>
 <li>A simple tree model that finds which factors have the biggest impact in determining why areas are hard to count</li>
-<li>A five-feature random forest model, a more stabilized tree model that considers how different combinations of demographic factors might impact undercounting</li>
 </ul>
-<p>We'll then present the weights from these models to determine which factors are most important - first the correlation coefficients for the linear model, then the variable importances from the two tree models.</p>
+<p>We'll then present the weights from these models to determine which factors are most important - first the correlation coefficients for the linear model, then the variable importances from the tree model.</p>
+<h3 id="Mathematical-Nuts-&amp;-Bolts">Mathematical Nuts &amp; Bolts<a class="anchor-link" href="#Mathematical-Nuts-&amp;-Bolts">&#182;</a></h3><p><strong>Correlations</strong> estimate how much response rates increase (positive correlation) or decrease (negative correlation) based on the increased presence of a certain subgroup. They range on a constant scale from -1 (perfectly negatively correlated), to 0 (absolutely no linear correlation), to 1 (perfectly positively correlated). These are just linear (Pearson) correlations, so they only measure linear relationships - it's possible a relationship could exist even if we don't conclude one does here.</p>
+<p>Generally, a correlation would need to be at or above .3 or at or below -.3 for us to consider it anything more than weak - but given that most of the groups we're referring to are minorities, we can likely lower that threshold to account for their limited ability to impact response rates as a whole. If, say, a subgroup makes up only 30% of the population, it's unreasonable to expect it to have a drastic impact on overall response rates, and a correlation of .2 may be quite telling (more on this in the caveats section below).</p>
+<p>Another way to think about correlations that is <strong>great</strong> for articles is this: if you square them, you get the percent of the variation in response rates that can be explained by the presence of that subgroup alone (again assuming that simple linear model).</p>
+<p>For instance, we'll later see that there's a positive 0.72 correlation between presence of people making over \$75,000 and census response rates in Maryland. This means that 52\% (over half!) of the variation in tract response rates in Maryland could be predicted based simply on the proportion of people making over \\$75,000 in a given tract.</p>
+<p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier.feature_importances_"><strong>Feature importances</strong></a> indicate how important a demographic factor is towards determining how hard-to-count an area is relative to other factors. They place a higher priority on weighting the most important factors - unlike correlations, which treat the factors independently.</p>
+<p><strong>Bootstrap p-values</strong> estimate the probability that we would see the correlations we got in 2020 if nothing had changed since 2010. If they're zero (or close to zero), it suggests that the relationship between prevalence of that group and census response rates has changed since 2010. The <em>lower</em> the p-value, the more significant the change. We'll use a 95% level of significance with a two-sided alternative hypothesis.</p>
+<p>Technically, our p-values tell us whether or not to reject the null hypothesis that there was no change in a correlation, not actually say that there was a definitive increase or decrease - but for simplicity, we'll label our results as "increase", "decrease", or "no change."</p>
+<h3 id="Statistical-Caveats">Statistical Caveats<a class="anchor-link" href="#Statistical-Caveats">&#182;</a></h3><p>Before we begin, it's very important to note that these results can partially be traced to the relative sizes of certain subgroups in tracts. Larger subgroups will have naturally have a bigger impact on response rates, so comparing the magnitudes of these results across subgroups isn't particularly useful.</p>
+<p>For instance, the impacts of the presence of American Indian / Alaska Native populations seem small, but they are actually difficult to ignore: they are surprisingly large given that this group has a national population of less than 5 million. Later, we will see how these impacts grow in an area with a larger AIAN population.</p>
+<p>Also, because we have weighted all tracts equally, this analysis will inherently put more emphasis on the characteristics of communities in less populous tracts. However, approximately 95% of census tracts have a population between 1,400 and 7,300, so we don't believe this will introduce extreme bias into our data.</p>
+<p>Finally, we are using ACS estimates from 2018 for our 2020 results, and a mix of decennial census numbers and ACS estimates for 2010; this is the best data we have for each period, but it admittedly isn't gospel truth, and the 2020 numbers are a little more of an estimation than the 2010 numbers.</p>
 
 </div>
 </div>
@@ -13158,58 +13171,287 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2><p>We now present the factors that correlated most with undercounting in 2010.</p>
+<h1 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h1><p>We now present the factors that correlated most with undercounting in 2010. The code blocks simply pull and reform the decennial census and ACS data to fit our means.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import packages</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LinearRegression</span>
+<span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">DecisionTreeRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">make_pipeline</span>
-</pre></div>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
-    </div>
-</div>
-</div>
+<span class="c1"># set API key </span>
+<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;2988f01f5e86175bda8beae2b5035e1ccef2d052&#39;</span>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;responses.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># tested shortcut for obtaining state FIPS codes</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;https://api.census.gov/data/2010/dec/responserate?get=GEO_ID,FSRR2010&amp;key=</span><span class="si">{key}</span><span class="s2">&amp;for=state:*&quot;</span>
+<span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">states</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+<span class="n">states</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">states</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span><span class="s1">&#39;72&#39;</span><span class="p">]</span>
+<span class="n">states</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
 
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">response</span>
-                                                    
-<span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                  
-<span class="n">rf_5</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">rf_5</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                                                    
-<span class="n">correlations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
-<span class="n">tree_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-<span class="n">rf_5_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rf_5</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-                                                    
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations</span><span class="p">,</span><span class="n">tree_importances</span><span class="p">,</span><span class="n">rf_5_importances</span><span class="p">],</span>\
+<span class="c1"># pull 2010 mail response rates for each state and concatenate</span>
+<span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">,</span><span class="s1">&#39;FSRR2010&#39;</span><span class="p">]</span>
+<span class="n">responses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;https://api.census.gov/data/2010/dec/responserate?get=GEO_ID,FSRR2010&amp;key=</span><span class="si">{key}</span><span class="s2">&amp;for=tract:*&amp;in=state:0&quot;</span>\
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;https://api.census.gov/data/2010/dec/responserate?get=GEO_ID,FSRR2010&amp;key=</span><span class="si">{key}</span><span class="s2">&amp;for=tract:*&amp;in=state:&quot;</span>\
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>       
+    <span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>        
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+    <span class="n">responses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">responses</span><span class="p">,</span><span class="n">temp</span><span class="p">])</span>
+
+<span class="c1"># get 2010 decennial census numbers</span>
+<span class="n">url_base</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;https://api.census.gov/data/2010/dec/sf1?get=</span><span class="se">\</span>
+<span class="s1">GEO_ID,P001001,P002005,P003002,P003003,P003004,</span><span class="se">\</span>
+<span class="s1">P003005,P003006,P003007,P003008,P004003&amp;key=</span><span class="si">{key}</span><span class="s1">&amp;for=tract:*&amp;in=state:&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="s1">&#39;01&#39;</span>
+<span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">dec_demos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span>
+    <span class="n">dec_demos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dec_demos</span><span class="p">,</span><span class="n">temp</span><span class="p">])</span>
+
+<span class="c1"># get 2010 five-year ACS averages to fill in data gaps</span>
+<span class="n">url_base</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;https://api.census.gov/data/2010/acs/acs5?get=GEO_ID,</span><span class="se">\</span>
+<span class="s1">B05001_006E,B06007_033E,</span><span class="se">\</span>
+<span class="s1">B06009_002E,B17001_002E,B06010_011E&amp;key=</span><span class="si">{key}</span><span class="s1">&amp;for=tract:*&amp;in=state:&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="s1">&#39;01&#39;</span>
+<span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">acs_demos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    
+    <span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>   
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span>
+    <span class="n">acs_demos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">acs_demos</span><span class="p">,</span><span class="n">temp</span><span class="p">])</span>
+
+<span class="c1"># set GEO_ID as index</span>
+<span class="n">dec_demos</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">dec_demos</span><span class="o">.</span><span class="n">GEO_ID</span>
+<span class="n">dec_demos</span> <span class="o">=</span> <span class="n">dec_demos</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
+<span class="n">acs_demos</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">acs_demos</span><span class="o">.</span><span class="n">GEO_ID</span>
+<span class="n">acs_demos</span> <span class="o">=</span> <span class="n">acs_demos</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
+<span class="n">responses</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">responses</span><span class="o">.</span><span class="n">GEO_ID</span>
+<span class="n">responses</span> <span class="o">=</span> <span class="n">responses</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
+
+<span class="c1"># merge response rates, ACS, and decennial data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">responses</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dec_demos</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">acs_demos</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">FSRR2010</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+
+<span class="c1"># rename columns</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="s1">&#39;population&#39;</span><span class="p">,</span><span class="s1">&#39;rural&#39;</span><span class="p">,</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>\
+                <span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="s1">&#39;AIAN&#39;</span><span class="p">,</span><span class="s1">&#39;asian&#39;</span><span class="p">,</span><span class="s1">&#39;pacific_islander&#39;</span><span class="p">,</span>\
+                <span class="s1">&#39;other_race&#39;</span><span class="p">,</span><span class="s1">&#39;multiracial&#39;</span><span class="p">,</span><span class="s1">&#39;hispanic&#39;</span><span class="p">,</span><span class="s1">&#39;noncitizen&#39;</span><span class="p">,</span>\
+               <span class="s1">&#39;foreign_born&#39;</span><span class="p">,</span><span class="s1">&#39;no_high_school&#39;</span><span class="p">,</span>\
+               <span class="s1">&#39;below_poverty_level&#39;</span><span class="p">,</span><span class="s1">&#39;make_over_75k&#39;</span><span class="p">]</span>
+
+<span class="c1"># change data to float</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+
+<span class="c1"># remove zero population areas</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">population</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># normalize by population</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;population&#39;</span><span class="p">,</span><span class="s1">&#39;response&#39;</span><span class="p">]:</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">/</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;population&#39;</span><span class="p">]</span>
+
+<span class="c1"># pull data from 2018 ACS</span>
+<span class="n">url_base</span> <span class="o">=</span> <span class="s1">&#39;https://api.census.gov/data/2018/acs/acs5?get=B01003_001E,B02001_002E,B02001_003E,B02017_001E,&#39;</span>\
+        <span class="o">+</span><span class="s1">&#39;B02001_005E,B02001_006E,B02001_007E,B02001_008E,B03002_012E,B05001_006E,B99051_005E,&#39;</span>\
+        <span class="o">+</span><span class="n">f</span><span class="s1">&#39;B17001_002E,B07010_011E,B06009_002E,GEO_ID&amp;key=</span><span class="si">{key}</span><span class="s1">&amp;for=tract:*&amp;in=state:&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="s1">&#39;01&#39;</span>
+<span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="n">data_2020</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url_base</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:]</span>
+        <span class="n">data_2020</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data_2020</span><span class="p">,</span><span class="n">temp</span><span class="p">])</span>
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<span class="c1"># rename columns</span>
+<span class="n">data_2020</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;population&#39;</span><span class="p">,</span><span class="s1">&#39;white&#39;</span><span class="p">,</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="s1">&#39;AIAN&#39;</span><span class="p">,</span><span class="s1">&#39;asian&#39;</span><span class="p">,</span><span class="s1">&#39;pacific_islander&#39;</span><span class="p">,</span>\
+<span class="s1">&#39;other_race&#39;</span><span class="p">,</span><span class="s1">&#39;multiracial&#39;</span><span class="p">,</span><span class="s1">&#39;hispanic&#39;</span><span class="p">,</span><span class="s1">&#39;noncitizen&#39;</span><span class="p">,</span><span class="s1">&#39;foreign_born&#39;</span><span class="p">,</span><span class="s1">&#39;below_poverty_level&#39;</span><span class="p">,</span>\
+<span class="s1">&#39;make_over_75k&#39;</span><span class="p">,</span><span class="s1">&#39;no_high_school&#39;</span><span class="p">,</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">,</span><span class="s1">&#39;county&#39;</span><span class="p">,</span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="s1">&#39;tract&#39;</span><span class="p">]</span>
+
+<span class="c1"># set GEO_ID as index</span>
+<span class="n">data_2020</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">data_2020</span><span class="o">.</span><span class="n">GEO_ID</span>
+
+<span class="c1"># drop extra columns</span>
+<span class="n">data_2020</span> <span class="o">=</span> <span class="n">data_2020</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">,</span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="s1">&#39;tract&#39;</span><span class="p">,</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">])</span>
+
+<span class="c1"># parse population to float</span>
+<span class="n">data_2020</span><span class="o">.</span><span class="n">population</span> <span class="o">=</span> <span class="n">data_2020</span><span class="o">.</span><span class="n">population</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+
+<span class="c1"># remove zero population areas</span>
+<span class="n">data_2020</span> <span class="o">=</span> <span class="n">data_2020</span><span class="p">[</span><span class="n">data_2020</span><span class="o">.</span><span class="n">population</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># parse demographic data to float and normalize by population</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">data_2020</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;population&#39;</span><span class="p">:</span>
+        <span class="n">data_2020</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_2020</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+        <span class="n">data_2020</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_2020</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">/</span> <span class="n">data_2020</span><span class="p">[</span><span class="s1">&#39;population&#39;</span><span class="p">]</span>
+
+<span class="c1"># data frame to hold tract responses</span>
+<span class="n">tract_responses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">,</span><span class="s1">&#39;CRRALL&#39;</span><span class="p">])</span>
+
+<span class="c1"># pull tract response data for 2020</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;https://api.census.gov/data/2020/dec/responserate?get=GEO_ID,CRRALL&amp;key=</span><span class="si">{key}</span><span class="s2">&amp;for=tract:*&amp;in=state:0&quot;</span>\
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;https://api.census.gov/data/2020/dec/responserate?get=GEO_ID,CRRALL&amp;key=</span><span class="si">{key}</span><span class="s2">&amp;for=tract:*&amp;in=state:&quot;</span>\
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">JSONContent</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">JSONContent</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:]</span>
+        <span class="n">tract_responses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tract_responses</span><span class="p">,</span><span class="n">temp</span><span class="p">],</span><span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+<span class="c1"># set index and column title for 2020 response rates</span>
+<span class="n">tract_responses</span><span class="p">[</span><span class="s1">&#39;CRRALL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tract_responses</span><span class="p">[</span><span class="s1">&#39;CRRALL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+<span class="n">tract_responses</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">tract_responses</span><span class="o">.</span><span class="n">GEO_ID</span>
+<span class="n">tract_responses</span> <span class="o">=</span> <span class="n">tract_responses</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
+<span class="n">tract_responses</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span>
+
+<span class="c1"># merge demographic data and response data</span>
+<span class="n">data_2020</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data_2020</span><span class="p">,</span><span class="n">tract_responses</span><span class="p">,</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
+
+<span class="c1"># create copy of original 2010 data</span>
+<span class="n">original_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># use proportion of rural population from 2010 to approximate the same for 2020 </span>
+<span class="n">data_2020</span><span class="p">[</span><span class="s1">&#39;rural&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;rural&#39;</span><span class="p">]</span>
+
+<span class="c1"># eliminate 2020 tracts that do not match tracts from 2010</span>
+<span class="n">data_2020</span> <span class="o">=</span> <span class="n">data_2020</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">data_2020</span><span class="o">.</span><span class="n">rural</span><span class="p">)]</span>
+
+<span class="c1"># remove five tracts that had null values for two variables</span>
+<span class="n">data_2020</span> <span class="o">=</span> <span class="n">data_2020</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">data_2020</span><span class="o">.</span><span class="n">make_over_75k</span><span class="p">)]</span> 
+<span class="n">data_2020</span> <span class="o">=</span> <span class="n">data_2020</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">data_2020</span><span class="o">.</span><span class="n">below_poverty_level</span><span class="p">)]</span> 
+
+<span class="c1"># create copy of original 2020 data</span>
+<span class="n">original_data_2020</span> <span class="o">=</span> <span class="n">data_2020</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># create dataset for 2010</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">response</span>
+                         
+<span class="c1"># fit tree model for 2010</span>
+<span class="n">tree_2010</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">tree_2010</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+ 
+<span class="c1"># generate correlations &amp; tree importances for 2010</span>
+<span class="n">correlations_2010</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">original_data</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">))</span>
+<span class="n">tree_importances_2010</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree_2010</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+
+<span class="c1"># create dataset for 2020</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">original_data_2020</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">original_data_2020</span><span class="o">.</span><span class="n">response</span>
+
+<span class="c1"># fit tree model for 2020</span>
+<span class="n">tree_2020</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">tree_2020</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># generate correlations &amp; tree importances for 2010</span>
+<span class="n">correlations_2020</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">original_data_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">))</span>
+<span class="n">tree_importances_2020</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree_2020</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+
+<span class="c1"># concatenate results from 2010</span>
+<span class="n">results_2010</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations_2010</span><span class="p">,</span><span class="n">tree_importances_2010</span><span class="p">],</span>\
              <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>\
-             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances&#39;</span><span class="p">,</span><span class="s1">&#39;random_forest_importances&#39;</span><span class="p">])</span>
+             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations_2010&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances_2010&#39;</span><span class="p">])</span>
+<span class="n">results_2010</span> <span class="o">=</span> <span class="n">results_2010</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">results</span>
+<span class="c1"># concatenate results from 2020</span>
+<span class="n">results_2020</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations_2020</span><span class="p">,</span><span class="n">tree_importances_2020</span><span class="p">],</span>\
+             <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">data_2020</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>\
+             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations_2020&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances_2020&#39;</span><span class="p">])</span>
+<span class="n">results_2020</span> <span class="o">=</span> <span class="n">results_2020</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># add dummy column</span>
+<span class="n">dummy_col</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;---------------------&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">results_2020</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">results_2010</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;---------------------&#39;</span><span class="p">)</span>
+
+<span class="c1"># assemble full results</span>
+<span class="n">full_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">results_2010</span><span class="p">,</span><span class="n">dummy_col</span><span class="p">,</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">full_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_results</span><span class="p">,</span><span class="n">results_2020</span><span class="p">,</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">full_results</span> <span class="o">=</span> <span class="n">full_results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
+<span class="n">full_results</span> <span class="o">=</span> <span class="n">full_results</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">full_results</span><span class="o">.</span><span class="n">correlations_2010</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">bootstrapped_correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span><span class="n">original_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">bootstrapped_correlations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">original_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">))</span>
+<span class="n">bootstrap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bootstrapped_correlations</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">correlations_2020</span> <span class="o">=</span> <span class="n">original_data_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
+
+<span class="n">pvals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Bootstrap P-value of Change in Correlation From 2010 to 2020&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">correlations_2020</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">pvals</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bootstrap</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">correlations_2020</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+<span class="n">p_results</span> <span class="o">=</span> <span class="n">pvals</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">p_results</span> <span class="o">=</span> <span class="n">p_results</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+<span class="n">p_results</span><span class="p">[</span><span class="n">pvals</span><span class="o">&lt;.</span><span class="mi">025</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Decreased&#39;</span>
+<span class="n">p_results</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;.</span><span class="mi">975</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Increased&#39;</span>
+<span class="n">pvals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;.</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pvals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;.</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">p_results</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;=.</span><span class="mi">025</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;No Change&#39;</span>
+
+<span class="n">pvals_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pvals</span><span class="p">)</span>
+<span class="n">pvals_df</span><span class="p">[</span><span class="s1">&#39;Conclusion From P-Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_results</span>
+<span class="n">pvals_df</span> <span class="o">=</span> <span class="n">pvals_df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">full_results</span><span class="o">.</span><span class="n">correlations_2010</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">full_results</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pvals_df</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13222,11 +13464,11 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[63]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13245,125 +13487,859 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>correlations</th>
-      <th>tree_importances</th>
-      <th>random_forest_importances</th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>below_poverty_level</th>
-      <td>-0.44</td>
-      <td>0.39</td>
-      <td>0.28</td>
+      <td>-0.46</td>
+      <td>-0.53</td>
+      <td>---------------------</td>
+      <td>0.27</td>
+      <td>0.33</td>
     </tr>
     <tr>
       <th>make_over_75k</th>
-      <td>0.39</td>
-      <td>0.10</td>
+      <td>0.38</td>
+      <td>0.48</td>
+      <td>---------------------</td>
+      <td>0.08</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.37</td>
+      <td>-0.51</td>
+      <td>---------------------</td>
+      <td>0.05</td>
       <td>0.10</td>
     </tr>
     <tr>
       <th>white</th>
       <td>0.36</td>
+      <td>0.30</td>
+      <td>---------------------</td>
       <td>0.07</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>no_high_school</th>
-      <td>-0.34</td>
-      <td>0.01</td>
-      <td>0.03</td>
+      <td>0.05</td>
     </tr>
     <tr>
       <th>black</th>
       <td>-0.34</td>
-      <td>0.02</td>
+      <td>-0.26</td>
+      <td>---------------------</td>
+      <td>0.06</td>
       <td>0.03</td>
     </tr>
     <tr>
-      <th>pop</th>
+      <th>population</th>
       <td>0.26</td>
-      <td>0.06</td>
-      <td>0.07</td>
+      <td>0.26</td>
+      <td>---------------------</td>
+      <td>0.10</td>
+      <td>0.08</td>
     </tr>
     <tr>
       <th>other_race</th>
       <td>-0.19</td>
-      <td>0.03</td>
+      <td>-0.26</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.16</td>
+      <td>-0.26</td>
+      <td>---------------------</td>
+      <td>0.04</td>
       <td>0.04</td>
     </tr>
     <tr>
       <th>hispanic</th>
-      <td>-0.19</td>
+      <td>-0.16</td>
+      <td>-0.29</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.15</td>
+      <td>-0.18</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>-0.14</td>
+      <td>-0.20</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.11</td>
+      <td>-0.03</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>-0.08</td>
+      <td>-0.15</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.01</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.416</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.054</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.423</td>
+      <td>No Change</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Findings">Findings<a class="anchor-link" href="#Findings">&#182;</a></h3><p>Examining the national results, it is abundantly clear across the board that socioeconomic factors correlate heavily with undercounting.</p>
+<p>We find a fairly substantial positive correlation between higher income and a higher likelihood of filling out a census form, and the white- and Asian-heavy areas are filling out census forms more frequently than areas with more African-Americans, Hispanics, and native populations.</p>
+<p>More populous, urban areas had higher return rates, as did areas with more minors.</p>
+<p>While things appear to have changed significantly for nearly every group since 2010, it appears that Hispanic- and non citizen-heavy areas are replying at a noticeably lower clip in 2020, which many feared after the White House's attempt to <a href="https://www.nytimes.com/2019/07/02/us/trump-census-citizenship-question.html">add a citizenship question</a> to this year's census.</p>
+<p>It also appears that areas with fewer high-school educated residents and more impoverished residents tend to respond at a lower rate in 2020 than they did in 2010.</p>
+<p>Meanwhile, it appears areas that are black-heavy are still having noticeable issues with undercounting, but this data suggests that perhaps those issues are, on the average, not quite as bad as in 2010.</p>
+<p>Our tree model identified economic status and education as the most important factors in determining responses - but it's possible that these are simply proxies for more granular socioeconomic differences.</p>
+<p>We're only scratching the surface, though...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-Do-I-Use-This-In-My-Newsroom?">How Do I Use This In My Newsroom?<a class="anchor-link" href="#How-Do-I-Use-This-In-My-Newsroom?">&#182;</a></h1><p>It's <strong>very</strong> easy to take this analysis and adapt it for your local area.</p>
+<p>We'll show a few examples of particularly interesting cases here.</p>
+<p><strong>Keep in mind: we can help you run data for your own state or county in literally a matter of seconds</strong> - see the end of this article for contact details (all we have to do is add one line of code!).</p>
+<p>To do this, we'll pretend we're in local newsrooms in a few different parts of the country.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Primary-Case-Study:-Kansas">Primary Case Study: Kansas<a class="anchor-link" href="#Primary-Case-Study:-Kansas">&#182;</a></h2><p>Let's say we're a newsroom in Topeka or Dodge City, and do this analysis for Kansas as a whole.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># function to filter down to results to one geographic area using numeric fips code</span>
+<span class="k">def</span> <span class="nf">show_area</span><span class="p">(</span><span class="n">fips</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;1400000US&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fips</span><span class="p">))]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
+    <span class="n">state_2010</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">original_data_2020</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;1400000US&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fips</span><span class="p">))]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
+    <span class="n">state_2020</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># follow same steps as original analysis</span>
+
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">state_2010</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">state_2010</span><span class="o">.</span><span class="n">response</span>
+
+    <span class="n">tree_2010</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+    <span class="n">tree_2010</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+    <span class="n">correlations_2010</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">state_2010</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">))</span>
+    <span class="n">tree_importances_2010</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree_2010</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">state_2020</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">state_2020</span><span class="o">.</span><span class="n">response</span>
+
+    <span class="n">tree_2020</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+    <span class="n">tree_2020</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+    <span class="n">correlations_2020</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">state_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">))</span>
+    <span class="n">tree_importances_2020</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree_2020</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+
+    <span class="n">results_2010</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations_2010</span><span class="p">,</span><span class="n">tree_importances_2010</span><span class="p">],</span>\
+                 <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">state_2010</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>\
+                 <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations_2010&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances_2010&#39;</span><span class="p">])</span>
+
+    <span class="n">results_2010</span> <span class="o">=</span> <span class="n">results_2010</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">results_2020</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations_2020</span><span class="p">,</span><span class="n">tree_importances_2020</span><span class="p">],</span>\
+                 <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">state_2020</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>\
+                 <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations_2020&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances_2020&#39;</span><span class="p">])</span>
+
+    <span class="n">results_2020</span> <span class="o">=</span> <span class="n">results_2020</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">dummy_col</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;---------------------&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">results_2020</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">results_2010</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;---------------------&#39;</span><span class="p">)</span>
+
+    <span class="n">full_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">results_2010</span><span class="p">,</span><span class="n">dummy_col</span><span class="p">,</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">full_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_results</span><span class="p">,</span><span class="n">results_2020</span><span class="p">,</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">full_results</span> <span class="o">=</span> <span class="n">full_results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
+    <span class="n">full_results</span> <span class="o">=</span> <span class="n">full_results</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">full_results</span><span class="o">.</span><span class="n">correlations_2010</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="n">bootstrapped_correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span><span class="n">state_2010</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">bootstrapped_correlations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">state_2010</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">))</span>
+    <span class="n">bootstrap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bootstrapped_correlations</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="n">correlations_2020</span> <span class="o">=</span> <span class="n">state_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
+    <span class="n">pvals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Bootstrap P-value of Change in Correlation From 2010 to 2020&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">correlations_2020</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+        <span class="n">pvals</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bootstrap</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">correlations_2020</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+    <span class="n">p_results</span> <span class="o">=</span> <span class="n">pvals</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">p_results</span> <span class="o">=</span> <span class="n">p_results</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+    <span class="n">p_results</span><span class="p">[</span><span class="n">pvals</span><span class="o">&lt;.</span><span class="mi">025</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Decreased&#39;</span>
+    <span class="n">p_results</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;.</span><span class="mi">975</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Increased&#39;</span>
+    <span class="n">pvals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;.</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pvals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;.</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">p_results</span><span class="p">[</span><span class="n">pvals</span><span class="o">&gt;=.</span><span class="mi">025</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;No Change&#39;</span>
+
+    <span class="n">pvals_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pvals</span><span class="p">)</span>
+    <span class="n">pvals_df</span><span class="p">[</span><span class="s1">&#39;Conclusion From P-Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_results</span>
+    <span class="n">pvals_df</span> <span class="o">=</span> <span class="n">pvals_df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">full_results</span><span class="o">.</span><span class="n">correlations_2010</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="n">display</span><span class="p">(</span><span class="n">full_results</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pvals_df</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Number of Tracts Examined: &#39;</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="n">state_2010</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">state_2020</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="n">show_area</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.55</td>
+      <td>0.65</td>
+      <td>---------------------</td>
+      <td>0.29</td>
+      <td>0.39</td>
+    </tr>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.50</td>
+      <td>-0.60</td>
+      <td>---------------------</td>
+      <td>0.10</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.46</td>
+      <td>-0.60</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.46</td>
+      <td>-0.48</td>
+      <td>---------------------</td>
       <td>0.02</td>
       <td>0.03</td>
     </tr>
     <tr>
+      <th>white</th>
+      <td>0.43</td>
+      <td>0.38</td>
+      <td>---------------------</td>
+      <td>0.11</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>-0.40</td>
+      <td>-0.40</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.37</td>
+      <td>0.36</td>
+      <td>---------------------</td>
+      <td>0.23</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
       <th>noncitizen</th>
-      <td>-0.15</td>
-      <td>0.00</td>
+      <td>-0.34</td>
+      <td>-0.42</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.34</td>
+      <td>-0.29</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.31</td>
+      <td>-0.23</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>-0.29</td>
+      <td>-0.35</td>
+      <td>---------------------</td>
+      <td>0.05</td>
       <td>0.01</td>
     </tr>
     <tr>
-      <th>spanish_poor_english</th>
-      <td>-0.15</td>
-      <td>0.00</td>
+      <th>pacific_islander</th>
+      <td>-0.12</td>
+      <td>-0.09</td>
+      <td>---------------------</td>
       <td>0.01</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.08</td>
+      <td>-0.23</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.04</td>
+      <td>0.06</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>-0.02</td>
+      <td>-0.14</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.054</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.266</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.006</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.177</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.474</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.392</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.155</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.049</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.084</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.129</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.138</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.020</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.278</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.001</td>
+      <td>Decreased</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  662
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, we see socioeconomic differences having an even bigger impact. There's a massive divide in response rates between the rich and the poor areas, and the majority-heavy and minority-heavy communities. It does not appear that these divides have been assuaged at all since 2010.</p>
+<p>It's pretty clear that Kansas' Hispanic and <a href="https://www.thekansan.com/news/20200119/students-flourish-in-garden-city-high-school-esl-classes">extremely diverse</a> minority, foreign-born, and undocumented communities are much more frequently undercounted than its more affluent, white communities.</p>
+<p>This is a <a href="https://www.dodgeglobe.com/news/20200207/we-dont-exist-in-push-for-dodge-city-complete-count-census-fears-threaten-resources">well-documented</a> issue in Kansas - but this kind of analysis can give new weight to a news story about why a region is hard-to-count by adding mathematical evidence.</p>
+<p>Looking at the tree importances, we see an even clearer line in the sand between the rich and the poor than we saw at the national level. It seems that these disparities are even more pronounced in Kansas.</p>
+<p>One other difference between Kansas and the United States as a whole is that we generally do not have enough evidence to say these relationships have changed significantly since 2010 in Kansas. This could be viewed as a negative in light of the divides not lessening despite the state's <a href="https://kansascounts.org/">complete count efforts</a>, or a positive in terms of the divides not significantly worsening despite the current political climate.</p>
+<p>Let's continue with some more quick analyses for some other interesting areas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Other-Quick-Examples">Other Quick Examples<a class="anchor-link" href="#Other-Quick-Examples">&#182;</a></h2><h3 id="Florida">Florida<a class="anchor-link" href="#Florida">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.34</td>
+      <td>-0.48</td>
+      <td>---------------------</td>
+      <td>0.17</td>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.26</td>
+      <td>0.23</td>
+      <td>---------------------</td>
+      <td>0.16</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.25</td>
+      <td>0.24</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.24</td>
+      <td>-0.24</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.21</td>
+      <td>-0.41</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>-0.20</td>
+      <td>-0.19</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.16</td>
+      <td>0.24</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.16</td>
+      <td>0.19</td>
+      <td>---------------------</td>
+      <td>0.08</td>
+      <td>0.04</td>
     </tr>
     <tr>
       <th>AIAN</th>
       <td>-0.14</td>
-      <td>0.01</td>
-      <td>0.02</td>
+      <td>-0.07</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.04</td>
     </tr>
     <tr>
       <th>rural</th>
       <td>-0.13</td>
-      <td>0.08</td>
-      <td>0.07</td>
+      <td>-0.17</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.03</td>
     </tr>
     <tr>
-      <th>under18</th>
-      <td>0.12</td>
-      <td>0.03</td>
-      <td>0.06</td>
+      <th>hispanic</th>
+      <td>0.10</td>
+      <td>-0.15</td>
+      <td>---------------------</td>
+      <td>0.10</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.07</td>
+      <td>-0.34</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.10</td>
     </tr>
     <tr>
       <th>multiracial</th>
-      <td>-0.11</td>
+      <td>-0.06</td>
       <td>0.01</td>
+      <td>---------------------</td>
+      <td>0.05</td>
       <td>0.03</td>
     </tr>
     <tr>
-      <th>asian</th>
-      <td>0.11</td>
-      <td>0.01</td>
-      <td>0.02</td>
-    </tr>
-    <tr>
       <th>foreign_born</th>
-      <td>-0.06</td>
-      <td>0.00</td>
-      <td>0.01</td>
+      <td>0.05</td>
+      <td>-0.19</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.04</td>
     </tr>
     <tr>
       <th>pacific_islander</th>
-      <td>-0.03</td>
+      <td>-0.05</td>
+      <td>-0.01</td>
+      <td>---------------------</td>
+      <td>0.03</td>
       <td>0.00</td>
-      <td>0.01</td>
-    </tr>
-    <tr>
-      <th>avgfamsize</th>
-      <td>-0.02</td>
-      <td>0.15</td>
-      <td>0.12</td>
-    </tr>
-    <tr>
-      <th>other_lang_poor_english</th>
-      <td>0.01</td>
-      <td>0.00</td>
-      <td>0.01</td>
     </tr>
   </tbody>
 </table>
@@ -13372,72 +14348,13 @@ div#notebook {
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>A couple quick definitions:</p>
-<ul>
-<li><strong>Correlations</strong> indicate how much mail return rates increase (positive) or decrease (negative) based on the increased presence of that subgroup</li>
-<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier.feature_importances_"><strong>Feature importances</strong></a> indicate how important a demographic factor is to determining how hard-to-count an area is relative to other factors </li>
-</ul>
-<p>It is abundantly clear across the board that socioeconomic factors correlated heavily undercounting, particularly economic factors.</p>
-<p>We find a fairly substantial correlation between higher income and a higher likelihood of filling out a census form, and the white- and Asian-heavy areas filled out census forms more frequently than areas with more African-Americans and Hispanics.</p>
-<p>More populous, urban areas had higher mail return rates, as did areas with more minors.</p>
-<p>It's interesting to note that income seems to be the biggest factor (moreso than race), although this could potentially be because income can function as a generalized proxy for more granular socioeconomic differences.</p>
-<p>Let's neutralize income and some of the other economic, education, population, and age data, and throw out the white category to get an idea of which minority groups seemed to struggle most with undercounting.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;make_over_75k&#39;</span><span class="p">,</span><span class="s1">&#39;white&#39;</span><span class="p">,</span><span class="s1">&#39;below_poverty_level&#39;</span><span class="p">,</span>\
-                          <span class="s1">&#39;no_high_school&#39;</span><span class="p">,</span><span class="s1">&#39;rural&#39;</span><span class="p">,</span><span class="s1">&#39;pop&#39;</span><span class="p">,</span><span class="s1">&#39;avgfamsize&#39;</span><span class="p">,</span><span class="s1">&#39;under18&#39;</span><span class="p">])</span>
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">response</span>
-                                                    
-<span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                  
-<span class="n">rf_5</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">rf_5</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                                                    
-<span class="n">correlations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
-<span class="n">tree_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-<span class="n">rf_5_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rf_5</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-                                                    
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations</span><span class="p">,</span><span class="n">tree_importances</span><span class="p">,</span><span class="n">rf_5_importances</span><span class="p">],</span>\
-             <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>\
-             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances&#39;</span><span class="p">,</span><span class="s1">&#39;random_forest_importances&#39;</span><span class="p">])</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">results</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[64]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13456,77 +14373,612 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>correlations</th>
-      <th>tree_importances</th>
-      <th>random_forest_importances</th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>black</th>
-      <td>-0.34</td>
-      <td>0.37</td>
-      <td>0.28</td>
+      <th>below_poverty_level</th>
+      <td>0.000</td>
+      <td>Decreased</td>
     </tr>
     <tr>
-      <th>hispanic</th>
-      <td>-0.19</td>
-      <td>0.05</td>
-      <td>0.07</td>
+      <th>population</th>
+      <td>0.074</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.279</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.384</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.000</td>
+      <td>Decreased</td>
     </tr>
     <tr>
       <th>other_race</th>
-      <td>-0.19</td>
-      <td>0.10</td>
-      <td>0.10</td>
+      <td>0.295</td>
+      <td>No Change</td>
     </tr>
     <tr>
-      <th>spanish_poor_english</th>
-      <td>-0.15</td>
+      <th>asian</th>
+      <td>0.062</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.035</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.004</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.002</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  3232
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In Florida, we see that response rates seem to have generally worsened significantly in more impoverished, poorly-educated areas, in areas with many non-citizens, and in areas with larger Hispanic populations.</p>
+<p>It's possible that these drops are tied together, and the extreme downturn we've seen in response rates among heavily Hispanic and non-citizen areas are contributing to the economic divides.</p>
+<p>Perhaps this could inspire a further investigation into how the current political climate is affecting the relationship between Florida's Hispanic population and the census.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Illinois">Illinois<a class="anchor-link" href="#Illinois">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.71</td>
+      <td>-0.67</td>
+      <td>---------------------</td>
+      <td>0.20</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.70</td>
+      <td>0.55</td>
+      <td>---------------------</td>
+      <td>0.49</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.60</td>
+      <td>-0.43</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.54</td>
+      <td>-0.62</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.48</td>
+      <td>0.52</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>-0.32</td>
+      <td>-0.42</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.30</td>
+      <td>-0.14</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.29</td>
+      <td>-0.43</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.29</td>
+      <td>0.29</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.25</td>
+      <td>-0.36</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.23</td>
+      <td>-0.04</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>-0.13</td>
+      <td>-0.20</td>
+      <td>---------------------</td>
       <td>0.01</td>
       <td>0.02</td>
     </tr>
     <tr>
+      <th>rural</th>
+      <td>0.13</td>
+      <td>0.06</td>
+      <td>---------------------</td>
+      <td>0.00</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.08</td>
+      <td>0.12</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>-0.05</td>
+      <td>-0.02</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.002</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.001</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.467</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
       <th>noncitizen</th>
-      <td>-0.15</td>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.018</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.029</td>
+      <td>No Change</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  2967
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In Illinois, we see absolutely massive divides between whites and African-Americans. However, we can also see an apparent improvement from 2010 to 2020, suggesting that perhaps these gaps in response rates have been mediated slightly. This is not the case for more heavily Hispanic areas, though - just as we would expect after looking at the rest of the country.</p>
+<p>We can dig deeper by looking specifically at Cook County, roughly half of whose population makes up the city of Chicago.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cook-County,-IL-(Chicago-and-surrounding-areas)">Cook County, IL (Chicago and surrounding areas)<a class="anchor-link" href="#Cook-County,-IL-(Chicago-and-surrounding-areas)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="mi">17031</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.73</td>
+      <td>-0.67</td>
+      <td>---------------------</td>
+      <td>0.61</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.70</td>
+      <td>0.52</td>
+      <td>---------------------</td>
+      <td>0.10</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.56</td>
+      <td>-0.34</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.52</td>
+      <td>0.54</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.50</td>
+      <td>-0.64</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.32</td>
+      <td>0.28</td>
+      <td>---------------------</td>
       <td>0.04</td>
       <td>0.05</td>
     </tr>
     <tr>
       <th>AIAN</th>
-      <td>-0.14</td>
-      <td>0.16</td>
-      <td>0.12</td>
+      <td>-0.23</td>
+      <td>-0.12</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.01</td>
     </tr>
     <tr>
-      <th>multiracial</th>
-      <td>-0.11</td>
-      <td>0.04</td>
-      <td>0.08</td>
+      <th>other_race</th>
+      <td>-0.22</td>
+      <td>-0.43</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.02</td>
     </tr>
     <tr>
       <th>asian</th>
-      <td>0.11</td>
+      <td>0.19</td>
       <td>0.20</td>
-      <td>0.17</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.17</td>
+      <td>-0.44</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.10</td>
+      <td>-0.34</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.03</td>
     </tr>
     <tr>
       <th>foreign_born</th>
-      <td>-0.06</td>
+      <td>0.08</td>
+      <td>-0.11</td>
+      <td>---------------------</td>
       <td>0.02</td>
-      <td>0.05</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>---------------------</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.00</td>
+      <td>0.10</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
     </tr>
     <tr>
       <th>pacific_islander</th>
-      <td>-0.03</td>
-      <td>0.01</td>
+      <td>-0.00</td>
       <td>0.02</td>
-    </tr>
-    <tr>
-      <th>other_lang_poor_english</th>
+      <td>---------------------</td>
       <td>0.01</td>
       <td>0.00</td>
-      <td>0.03</td>
     </tr>
   </tbody>
 </table>
@@ -13535,76 +14987,13 @@ div#notebook {
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>A higher presence of African-Americans correlated with a lower mail return rate, much moreso than for any other race. We can see a similar effect for Hispanics, American Indians &amp; Alaska Natives, multiracial populations, and other minority populations, although to a lesser degree.</p>
-<p>It's worth noting, again, that a higher presence of Asians tended to indicate a higher mail return rate, although not to the same degree as a higher presence of whites.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-Do-I-Use-This-In-My-Newsroom?">How Do I Use This In My Newsroom?<a class="anchor-link" href="#How-Do-I-Use-This-In-My-Newsroom?">&#182;</a></h2><p>We'll show an example here. To do this, we'll pretend we're a newsroom in Kansas.</p>
-<p><strong>Keep in mind: we can help you run data for your own state or county in a matter of minutes</strong> - see the end of this article for contact details (all we have to do is change one line of code!).</p>
-<p>Let's take this same approach for Kansas, and see how the data changes, and what conclusions we might make if we worked at a newsroom in Topeka or Dodge City.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;responses.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;1400000US20&#39;</span><span class="p">)]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;GEO_ID&#39;</span><span class="p">)</span>
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">response</span>
-                                                    
-<span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                  
-<span class="n">rf_5</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">rf_5</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                                                    
-<span class="n">correlations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
-<span class="n">tree_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-<span class="n">rf_5_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rf_5</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-                                                    
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations</span><span class="p">,</span><span class="n">tree_importances</span><span class="p">,</span><span class="n">rf_5_importances</span><span class="p">],</span>\
-             <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>\
-             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances&#39;</span><span class="p">,</span><span class="s1">&#39;random_forest_importances&#39;</span><span class="p">])</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">results</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[65]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13623,125 +15012,930 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>correlations</th>
-      <th>tree_importances</th>
-      <th>random_forest_importances</th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.001</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.250</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.041</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.290</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.407</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.109</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  1284
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see much of the same here, which isn't surprising as Cook County makes up nearly half the population of Illinois.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Los-Angeles-County">Los Angeles County<a class="anchor-link" href="#Los-Angeles-County">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="s1">&#39;06037&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.49</td>
+      <td>-0.60</td>
+      <td>---------------------</td>
+      <td>0.26</td>
+      <td>0.39</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.36</td>
+      <td>-0.57</td>
+      <td>---------------------</td>
+      <td>0.08</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>-0.36</td>
+      <td>-0.48</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.33</td>
+      <td>-0.54</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.27</td>
+      <td>0.35</td>
+      <td>---------------------</td>
+      <td>0.08</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.26</td>
+      <td>-0.49</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.26</td>
+      <td>-0.11</td>
+      <td>---------------------</td>
+      <td>0.10</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.25</td>
+      <td>0.16</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.23</td>
+      <td>-0.10</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>-0.21</td>
+      <td>-0.28</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.16</td>
+      <td>0.48</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.14</td>
+      <td>0.22</td>
+      <td>---------------------</td>
+      <td>0.07</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>-0.05</td>
+      <td>0.03</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.02</td>
+      <td>0.21</td>
+      <td>---------------------</td>
+      <td>0.16</td>
+      <td>0.02</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.002</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.057</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.495</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.002</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  1997
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Los Angeles County tells a similar story - the divide between whites and African-Americans has lessened, and response rates among heavier Hispanic and non-citizen communities have plummeted. More heavily Asian communities, meanwhile, appear to be responding well above the typical clip.</p>
+<p>This could again be an outstanding jumping off point for a story about the relationship between the Hispanic community and the census, and how it has been affected by the current political climate.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Louisiana">Louisiana<a class="anchor-link" href="#Louisiana">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>white</th>
+      <td>0.53</td>
+      <td>0.04</td>
+      <td>---------------------</td>
+      <td>0.27</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.50</td>
+      <td>-0.03</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.45</td>
+      <td>0.31</td>
+      <td>---------------------</td>
+      <td>0.27</td>
+      <td>0.15</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.44</td>
+      <td>0.27</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.39</td>
+      <td>-0.32</td>
+      <td>---------------------</td>
+      <td>0.08</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.21</td>
+      <td>-0.37</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>-0.19</td>
+      <td>-0.03</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.14</td>
+      <td>-0.12</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.11</td>
+      <td>-0.04</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.11</td>
+      <td>0.01</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>-0.04</td>
+      <td>-0.09</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>-0.03</td>
+      <td>0.06</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.03</td>
+      <td>-0.38</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>-0.02</td>
+      <td>0.14</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.01</td>
+      <td>-0.16</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.03</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>white</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.030</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.283</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.001</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.032</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.079</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.007</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  890
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Louisiana has a curious, almost unbelievable trend: the disparities in response rates between the heavier-white and heavier-black communities seem to have almost completely disappeared.</p>
+<p>This is an extremely odd change, and it's difficult to make sense of. There are nearly 900 tracts in Louisiana, so it doesn't appear to be variation due to sample size. There's no immediate, obvious reason why this might be happening. It could be a bizarre random variation, but perhaps something else is going on here.</p>
+<p>It would be a highly interesting trend for a newsroom to investigate.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Maryland">Maryland<a class="anchor-link" href="#Maryland">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>make_over_75k</th>
-      <td>0.54</td>
-      <td>0.41</td>
-      <td>0.29</td>
+      <td>0.61</td>
+      <td>0.72</td>
+      <td>---------------------</td>
+      <td>0.38</td>
+      <td>0.53</td>
     </tr>
     <tr>
       <th>below_poverty_level</th>
-      <td>-0.48</td>
-      <td>0.03</td>
-      <td>0.05</td>
-    </tr>
-    <tr>
-      <th>hispanic</th>
-      <td>-0.46</td>
-      <td>0.01</td>
-      <td>0.02</td>
-    </tr>
-    <tr>
-      <th>no_high_school</th>
-      <td>-0.46</td>
-      <td>0.04</td>
-      <td>0.06</td>
-    </tr>
-    <tr>
-      <th>other_race</th>
-      <td>-0.40</td>
-      <td>0.06</td>
-      <td>0.02</td>
-    </tr>
-    <tr>
-      <th>white</th>
-      <td>0.39</td>
+      <td>-0.57</td>
+      <td>-0.70</td>
+      <td>---------------------</td>
       <td>0.14</td>
       <td>0.19</td>
     </tr>
     <tr>
-      <th>spanish_poor_english</th>
-      <td>-0.36</td>
-      <td>0.01</td>
-      <td>0.01</td>
-    </tr>
-    <tr>
-      <th>pop</th>
-      <td>0.36</td>
-      <td>0.09</td>
-      <td>0.12</td>
-    </tr>
-    <tr>
-      <th>noncitizen</th>
-      <td>-0.34</td>
-      <td>0.02</td>
-      <td>0.02</td>
+      <th>no_high_school</th>
+      <td>-0.51</td>
+      <td>-0.58</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.03</td>
     </tr>
     <tr>
       <th>black</th>
-      <td>-0.34</td>
-      <td>0.03</td>
+      <td>-0.40</td>
+      <td>-0.51</td>
+      <td>---------------------</td>
+      <td>0.05</td>
       <td>0.04</td>
     </tr>
     <tr>
-      <th>multiracial</th>
-      <td>-0.31</td>
-      <td>0.01</td>
-      <td>0.01</td>
-    </tr>
-    <tr>
-      <th>foreign_born</th>
-      <td>-0.29</td>
-      <td>0.00</td>
-      <td>0.02</td>
-    </tr>
-    <tr>
-      <th>under18</th>
-      <td>0.27</td>
-      <td>0.01</td>
+      <th>white</th>
+      <td>0.39</td>
+      <td>0.47</td>
+      <td>---------------------</td>
       <td>0.03</td>
-    </tr>
-    <tr>
-      <th>avgfamsize</th>
-      <td>-0.15</td>
-      <td>0.08</td>
       <td>0.03</td>
-    </tr>
-    <tr>
-      <th>pacific_islander</th>
-      <td>-0.12</td>
-      <td>0.00</td>
-      <td>0.01</td>
-    </tr>
-    <tr>
-      <th>AIAN</th>
-      <td>-0.09</td>
-      <td>0.02</td>
-      <td>0.02</td>
-    </tr>
-    <tr>
-      <th>other_lang_poor_english</th>
-      <td>-0.04</td>
-      <td>0.01</td>
-      <td>0.01</td>
     </tr>
     <tr>
       <th>asian</th>
+      <td>0.26</td>
+      <td>0.33</td>
+      <td>---------------------</td>
+      <td>0.05</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.25</td>
+      <td>-0.08</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.23</td>
+      <td>0.27</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>-0.20</td>
+      <td>-0.20</td>
+      <td>---------------------</td>
       <td>0.03</td>
       <td>0.02</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.13</td>
+      <td>-0.18</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>-0.13</td>
+      <td>-0.00</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.03</td>
+      <td>0.10</td>
+      <td>---------------------</td>
+      <td>0.04</td>
       <td>0.03</td>
     </tr>
     <tr>
-      <th>rural</th>
-      <td>-0.02</td>
+      <th>foreign_born</th>
       <td>0.01</td>
-      <td>0.03</td>
+      <td>0.01</td>
+      <td>---------------------</td>
+      <td>0.07</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.01</td>
+      <td>0.07</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.01</td>
     </tr>
   </tbody>
 </table>
@@ -13750,65 +15944,13 @@ div#notebook {
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here, we see socioeconomic differences having an even bigger impact. There's a massive divide in mail return rates between the rich and the poor areas, and the majority-heavy and minority-heavy communities.</p>
-<p>We also see that, while the issue of African-American undercounting doesn't vary much from the rest of the country, Hispanics and noncitizens appear to be at significantly higher risk in Kansas than in the rest of the country. The negative correlations between those factors and mail response rates more than doubled from the national level to Kansas.</p>
-<p>By neutralizing the same variables as before, we can get an even closer look at these factors.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;make_over_75k&#39;</span><span class="p">,</span><span class="s1">&#39;white&#39;</span><span class="p">,</span><span class="s1">&#39;below_poverty_level&#39;</span><span class="p">,</span>\
-                          <span class="s1">&#39;no_high_school&#39;</span><span class="p">,</span><span class="s1">&#39;rural&#39;</span><span class="p">,</span><span class="s1">&#39;pop&#39;</span><span class="p">,</span><span class="s1">&#39;avgfamsize&#39;</span><span class="p">,</span><span class="s1">&#39;under18&#39;</span><span class="p">])</span>
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">response</span>
-                                                    
-<span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                  
-<span class="n">rf_5</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">rf_5</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-                                                    
-<span class="n">correlations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
-<span class="n">tree_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-<span class="n">rf_5_importances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rf_5</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-                                                    
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">correlations</span><span class="p">,</span><span class="n">tree_importances</span><span class="p">,</span><span class="n">rf_5_importances</span><span class="p">],</span>\
-             <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>\
-             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">,</span><span class="s1">&#39;tree_importances&#39;</span><span class="p">,</span><span class="s1">&#39;random_forest_importances&#39;</span><span class="p">])</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;correlations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">results</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[66]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13827,77 +15969,85 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>correlations</th>
-      <th>tree_importances</th>
-      <th>random_forest_importances</th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>hispanic</th>
-      <td>-0.46</td>
-      <td>0.34</td>
-      <td>0.23</td>
+      <th>make_over_75k</th>
+      <td>0.000</td>
+      <td>Increased</td>
     </tr>
     <tr>
-      <th>other_race</th>
-      <td>-0.40</td>
-      <td>0.08</td>
-      <td>0.08</td>
+      <th>below_poverty_level</th>
+      <td>0.000</td>
+      <td>Decreased</td>
     </tr>
     <tr>
-      <th>spanish_poor_english</th>
-      <td>-0.36</td>
-      <td>0.02</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>noncitizen</th>
-      <td>-0.34</td>
-      <td>0.03</td>
-      <td>0.04</td>
+      <th>no_high_school</th>
+      <td>0.000</td>
+      <td>Decreased</td>
     </tr>
     <tr>
       <th>black</th>
-      <td>-0.34</td>
-      <td>0.15</td>
-      <td>0.16</td>
+      <td>0.000</td>
+      <td>Decreased</td>
     </tr>
     <tr>
-      <th>multiracial</th>
-      <td>-0.31</td>
-      <td>0.09</td>
-      <td>0.11</td>
-    </tr>
-    <tr>
-      <th>foreign_born</th>
-      <td>-0.29</td>
-      <td>0.10</td>
-      <td>0.09</td>
-    </tr>
-    <tr>
-      <th>pacific_islander</th>
-      <td>-0.12</td>
-      <td>0.01</td>
-      <td>0.02</td>
-    </tr>
-    <tr>
-      <th>AIAN</th>
-      <td>-0.09</td>
-      <td>0.05</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>other_lang_poor_english</th>
-      <td>-0.04</td>
-      <td>0.01</td>
-      <td>0.02</td>
+      <th>white</th>
+      <td>0.002</td>
+      <td>Increased</td>
     </tr>
     <tr>
       <th>asian</th>
-      <td>0.03</td>
-      <td>0.10</td>
-      <td>0.11</td>
+      <td>0.003</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.093</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.475</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.394</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.032</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.021</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.433</td>
+      <td>No Change</td>
     </tr>
   </tbody>
 </table>
@@ -13906,6 +16056,17 @@ div#notebook {
 
 </div>
 
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  1266
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -13913,9 +16074,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It's abundantly clear that Kansas' Hispanic and <a href="https://www.thekansan.com/news/20200119/students-flourish-in-garden-city-high-school-esl-classes">extremely diverse</a> minority and undocumented communities were much more frequently undercounted than it's more affluent, white communities.</p>
-<p>This is a <a href="https://www.dodgeglobe.com/news/20200207/we-dont-exist-in-push-for-dodge-city-complete-count-census-fears-threaten-resources">well-documented</a> issue in Kansas - but this kind of analysis can give new weight to discussions about why a region is hard-to-count by adding evidence.</p>
-<p>Ranking these weights and seeing how they compare is an excellent way to glean an idea of why your region is hard to count, and we can help you interpret them if you'd like us to.</p>
+<p>In Maryland, we see massive, worsening divides between the rich and the poor, the educated and the less-educated, as well as most of the typical racial divides - although similarly to Los Angeles County, the more heavily Asian communities appear to be faring better than the norm.</p>
+<p>We can look at Baltimore City to zero in on an area with very well-known disparities.</p>
 
 </div>
 </div>
@@ -13923,9 +16083,317 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-We-Can-Help">How We Can Help<a class="anchor-link" href="#How-We-Can-Help">&#182;</a></h2><p><em>NewsCounts</em> can either run this analysis for your state (or possibly even county if it's large enough), and help you determine which factors correlated with undercounting there.</p>
-<p>We can do this by looking back at 2010, or go in-the-moment and look at why it might be happening right now in 2020.</p>
-<p>We're also <em>very</em> open to incorporating new data. There are thousands of data points we can add if you feel another demographic factor might be good for modeling why your region is hard-to-count. Drop us a note if you have an idea, and we'll make an analysis that works for you.</p>
+<h3 id="Baltimore">Baltimore<a class="anchor-link" href="#Baltimore">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="mi">24510</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.51</td>
+      <td>-0.67</td>
+      <td>---------------------</td>
+      <td>0.37</td>
+      <td>0.49</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.42</td>
+      <td>0.66</td>
+      <td>---------------------</td>
+      <td>0.09</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.40</td>
+      <td>-0.58</td>
+      <td>---------------------</td>
+      <td>0.14</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.35</td>
+      <td>0.26</td>
+      <td>---------------------</td>
+      <td>0.09</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.34</td>
+      <td>0.60</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.13</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.28</td>
+      <td>-0.55</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>-0.23</td>
+      <td>-0.14</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>-0.18</td>
+      <td>-0.06</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.16</td>
+      <td>-0.05</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.08</td>
+      <td>0.18</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>-0.05</td>
+      <td>0.06</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.02</td>
+      <td>0.04</td>
+      <td>---------------------</td>
+      <td>0.07</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>-0.02</td>
+      <td>-0.07</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.00</td>
+      <td>-0.03</td>
+      <td>---------------------</td>
+      <td>0.00</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>---------------------</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.003</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.001</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.068</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.000</td>
+      <td>Increased</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.103</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.028</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.071</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.105</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.087</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.253</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.439</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.284</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  196
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>White this is a very small sample of tracts, it certaily appears that the rich/poor and white/African-American divides in response rates are growing far worse in Baltimore.</p>
 
 </div>
 </div>
@@ -13933,10 +16401,348 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Contact-Info-&amp;-Other-Resources">Contact Info &amp; Other Resources<a class="anchor-link" href="#Contact-Info-&amp;-Other-Resources">&#182;</a></h2><p>Feel free to email <a href="mailto:benjamin.livingston@columbia.edu">benjamin.livingston@columbia.edu</a> or post on the NewsCounts Slack channel (email Benjamin for an invite!) any time if you'd like us to help you get started with this.</p>
-<p>The GitHub repository for our response rate monitoring is <a href="https://github.com/bwliv/censusresponses">here</a> if you'd like to play with this data yourself.</p>
-<p><a href="https://www.censushardtocountmaps2020.us/">CUNY's hard-to-count map</a> is an excellent resource for a general look at which areas were hard-to-count in 2010.</p>
-<p>Please don't hesistate to reach out with any census reporting-related questions. We recognize this spring is a challenging time for journalists, and we're here to make census reporting easier on you.</p>
+<h3 id="Montana">Montana<a class="anchor-link" href="#Montana">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>correlations_2010</th>
+      <th>correlations_2020</th>
+      <th>---------------------</th>
+      <th>tree_importances_2010</th>
+      <th>tree_importances_2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>rural</th>
+      <td>-0.54</td>
+      <td>-0.71</td>
+      <td>---------------------</td>
+      <td>0.37</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.49</td>
+      <td>0.58</td>
+      <td>---------------------</td>
+      <td>0.06</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>-0.37</td>
+      <td>-0.28</td>
+      <td>---------------------</td>
+      <td>0.00</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.33</td>
+      <td>0.24</td>
+      <td>---------------------</td>
+      <td>0.19</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.23</td>
+      <td>0.21</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>-0.19</td>
+      <td>0.20</td>
+      <td>---------------------</td>
+      <td>0.10</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.19</td>
+      <td>0.21</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>-0.17</td>
+      <td>-0.27</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.14</td>
+      <td>0.11</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.11</td>
+      <td>0.05</td>
+      <td>---------------------</td>
+      <td>0.01</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>---------------------</td>
+      <td>0.04</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>-0.03</td>
+      <td>-0.20</td>
+      <td>---------------------</td>
+      <td>0.08</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.03</td>
+      <td>-0.01</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.01</td>
+      <td>0.05</td>
+      <td>---------------------</td>
+      <td>0.03</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.01</td>
+      <td>-0.01</td>
+      <td>---------------------</td>
+      <td>0.02</td>
+      <td>0.05</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bootstrap P-value of Change in Correlation From 2010 to 2020</th>
+      <th>Conclusion From P-Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>rural</th>
+      <td>0.000</td>
+      <td>Decreased</td>
+    </tr>
+    <tr>
+      <th>population</th>
+      <td>0.026</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>AIAN</th>
+      <td>0.306</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>white</th>
+      <td>0.295</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>asian</th>
+      <td>0.374</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>0.410</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>make_over_75k</th>
+      <td>0.062</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>no_high_school</th>
+      <td>0.077</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>multiracial</th>
+      <td>0.287</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>hispanic</th>
+      <td>0.200</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>pacific_islander</th>
+      <td>0.412</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>other_race</th>
+      <td>0.260</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>below_poverty_level</th>
+      <td>0.232</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>noncitizen</th>
+      <td>0.110</td>
+      <td>No Change</td>
+    </tr>
+    <tr>
+      <th>foreign_born</th>
+      <td>0.180</td>
+      <td>No Change</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Number of Tracts Examined:  208
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In Montana, we see populous areas faring much better than rural areas, and white/black/Asian/Hispanic-heavy areas faring much better than the native-heavy areas.</p>
+<p>While we're again dealing with a small sample size, this does a great job of illustrating the challenge of counting native populations.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Other-States,-Counties,-etc.">Other States, Counties, etc.<a class="anchor-link" href="#Other-States,-Counties,-etc.">&#182;</a></h3><p>See the section below!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-We-Can-Help">How We Can Help<a class="anchor-link" href="#How-We-Can-Help">&#182;</a></h1><p><em>NewsCounts</em> can help you run this analysis for your state (or possibly even county if it's large enough), and determine which factors correlated with undercounting there.</p>
+<p>We can do this by looking back at 2010, and go in-the-moment and look at why it might be happening right now in 2020, and whether things are getting better or worse.</p>
+<p>It is <em>very</em> easy for us to pop out these same numbers for just about any level of US geography with a FIPS code. We can do it almost instantaneously - just ask!</p>
+<p>We're also quite open to incorporating new data. There are thousands of data points we can add if you feel another demographic factor might be good for modeling why your region is hard-to-count. Drop us a note if you have an idea, and we'll make an analysis that works for you.</p>
+<h3 id="Running-This-Analysis-For-Yourself-(if-you-want-to-try!)">Running This Analysis For Yourself (if you want to try!)<a class="anchor-link" href="#Running-This-Analysis-For-Yourself-(if-you-want-to-try!)">&#182;</a></h3><p>We're very happy to do this for you, but if you prefer getting your hands on this tool yourself (and you're familiar with Jupyter), just follow these steps and you should be able to replicate this for your area (or multiple areas) in just minutes:</p>
+<ol>
+<li>Download the notebook from <a href="https://github.com/bwliv/censusresponses/blob/master/undercount_modeling.ipynb">this project's repo</a> by hitting "raw" and then "save as", or fork the repo and run the notebook from there</li>
+<li>Run all this notebook's cells as-is (they should take about five minutes to run)</li>
+<li>Add and run a block with the code <em>show_area(--fips--)</em>, where --fips-- is the FIPS code of the <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696">state</a> or <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/home/?cid=nrcs143_013697">county</a> you want to look up.</li>
+<li>Voilà! You have your results.</li>
+</ol>
+<h3 id="Contact-Info-&amp;-Other-Resources">Contact Info &amp; Other Resources<a class="anchor-link" href="#Contact-Info-&amp;-Other-Resources">&#182;</a></h3><p>Feel free to email <a href="mailto:benjamin.livingston@columbia.edu">benjamin.livingston@columbia.edu</a> or post on the NewsCounts Slack channel (email Benjamin for an invite!) any time if you'd like us to help you get started with this.</p>
+<p>The Census Bureau is tracking 2020 response rates and provides <a href="https://2020census.gov/en/response-rates.html">a wonderful map with up-to-date data</a>. <em>NewsCounts</em> also provides a <a href="https://newscounts.appspot.com/">beta dashboard</a> and <a href="https://bernacho.github.io/NewsCounts-ResponseRatesAPI/API_documentation.html">API</a> that allows you to grab the daily response data for yourself.</p>
+<p><a href="https://www.censushardtocountmaps2020.us/">CUNY's hard-to-count map</a> is an excellent resource for a general look back at which areas were hard-to-count in 2010.</p>
+<p>Please don't hesistate to reach out with any census reporting-related questions. We recognize this spring is a challenging time for journalists, and we're here to make covering this pivotal census easier for you.</p>
 
 </div>
 </div>
