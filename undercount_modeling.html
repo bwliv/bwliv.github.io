@@ -16915,11 +16915,31 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Appendix:-Technical-Details">Appendix: Technical Details<a class="anchor-link" href="#Appendix:-Technical-Details">&#182;</a></h1><h3 id="Running-This-Analysis-For-Yourself-(if-you-want-to-try!)">Running This Analysis For Yourself (if you want to try!)<a class="anchor-link" href="#Running-This-Analysis-For-Yourself-(if-you-want-to-try!)">&#182;</a></h3><p>We're very happy to do this for you, but if you prefer getting your hands on this tool yourself (and you're familiar with Jupyter), just follow these steps and you should be able to replicate this for your area (or multiple areas) in just minutes:</p>
 <ol>
-<li>Download the notebook from <a href="https://github.com/bwliv/censusresponses/blob/master/undercount_modeling.ipynb">this project's repo</a> by hitting "raw" and then "save as", or fork the repo and run the notebook from there</li>
-<li>Run all this notebook's cells as-is (they should take about five minutes to run)</li>
-<li>Add and run a block with the code <em>show_area(--fips--)</em>, where --fips-- is the FIPS code of the <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696">state</a> or <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/home/?cid=nrcs143_013697">county</a> you want to look up.</li>
-<li>Voilà! You have your results.</li>
+<li>Access this notebook in <a href="https://colab.research.google.com/drive/1EDXffZXTY11ikcsdWvV9_jPJ66WECd0V">Google Colab</a> and copy it over to your Google Drive, or download the notebook from <a href="https://github.com/bwliv/censusresponses/blob/master/undercount_modeling.ipynb">this project's repo</a> by hitting "raw" and then "save as".</li>
+<li>Run all this notebook's cells as-is (they should take five minutes or less to run)</li>
+<li>In the code block below, fill in <em>show_area(--fips--)</em> with the FIPS code of the <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696">state</a> or <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/home/?cid=nrcs143_013697">county</a> you want to look up, and run the block.</li>
+<li>Voilà! You have your up-to-date results.</li>
 </ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show_area</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Mathematical-Nuts-&amp;-Bolts">Mathematical Nuts &amp; Bolts<a class="anchor-link" href="#Mathematical-Nuts-&amp;-Bolts">&#182;</a></h3><p><strong>Correlations</strong> estimate how much response rates increase (positive correlation) or decrease (negative correlation) based on the increased presence of a certain subgroup. They range on a constant scale from -1 (perfectly negatively correlated), to 0 (absolutely no linear correlation), to 1 (perfectly positively correlated). These are just linear (Pearson) correlations, so they only measure linear relationships - it's possible a relationship could exist even if we didn't conclude one does here.</p>
 <p>Generally, a correlation would need to be at or above .3 or at or below -.3 for us to consider it anything more than weak - but given that most of the groups we're referring to are minorities, we can likely lower that threshold to account for their limited ability to impact response rates as a whole. If, say, a subgroup makes up only 30% of the population, it's unreasonable to expect it to have a drastic impact on overall response rates, and a correlation of .2 may be quite telling (more on this in the caveats section below).</p>
 <p>Another way to think about correlations that is <strong>great</strong> for articles is this: if you square them, you get the percent of the variation in response rates that can be explained by the presence of that subgroup alone (again assuming that simple linear model).</p>
