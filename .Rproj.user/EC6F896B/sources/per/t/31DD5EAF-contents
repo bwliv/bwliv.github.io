@@ -1,0 +1,12 @@
+library(ppcor)
+setwd('C:\\Users\\bwliv\\OneDrive\\Documents\\censusresponses\\COVID-19')
+data = read.csv('with_unreported.csv',header=T)[-1]
+data_overall = data[c(1,2:5,7:8,10:11,13,18)]
+data_internet= data[c(1,2:5,7:8,10:11,13,19)]
+overall_cors = pcor(data_overall)[['estimate']]
+internet_cors = pcor(data_internet)[['estimate']]
+rownames(overall_cors) = colnames(overall_cors) = colnames(data_overall)
+rownames(internet_cors) = colnames(internet_cors) = colnames(data_internet)
+write.csv(overall_cors,'overall_rate_partial_cors.csv')
+write.csv(internet_cors,'internet_rate_partial_cors.csv')
+View(overall_cors)

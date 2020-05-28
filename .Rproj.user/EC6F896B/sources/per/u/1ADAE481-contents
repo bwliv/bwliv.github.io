@@ -1,0 +1,20 @@
+library(SMPracticals)
+dev.new()
+data(manaus)
+par(mfrow=c(2,2))
+plot(manaus)
+acf(manaus)
+pacf(manaus)
+
+fit <- ar(manaus)
+fit$aic
+plot(fit$aic[-1]) # AIC without initial huge value
+
+fit1 <- arima(manaus,order=c(1,0,1))
+fit1
+
+fit2 <- arima(manaus,order=c(1,1,1))
+
+tsdiag(fit1)
+
+tsdiag(fit2)
